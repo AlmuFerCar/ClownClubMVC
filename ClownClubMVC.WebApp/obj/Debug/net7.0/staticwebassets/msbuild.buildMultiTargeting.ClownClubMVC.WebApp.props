@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\build\ClownClubMVC.WebApp.props" />
+</Project>

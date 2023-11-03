@@ -1,0 +1,17 @@
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\bin\Debug\net7.0\ClownClubMVC.Data.deps.json
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\bin\Debug\net7.0\ClownClubMVC.Data.runtimeconfig.json
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\bin\Debug\net7.0\ClownClubMVC.Data.dll
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\bin\Debug\net7.0\ClownClubMVC.Data.pdb
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\bin\Debug\net7.0\ClownClubMVC.Models.dll
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\bin\Debug\net7.0\ClownClubMVC.Models.pdb
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.csproj.AssemblyReference.cache
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.AssemblyInfoInputs.cache
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.AssemblyInfo.cs
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.csproj.CoreCompileInputs.cache
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.csproj.CopyComplete
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.dll
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\refint\ClownClubMVC.Data.dll
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.pdb
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ClownClubMVC.Data.genruntimeconfig.cache
+C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.Data\obj\Debug\net7.0\ref\ClownClubMVC.Data.dll
