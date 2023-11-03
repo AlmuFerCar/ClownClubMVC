@@ -1,5 +1,5 @@
 ﻿﻿@{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Lista Usuarios";
 }
 
 
@@ -77,19 +77,19 @@
     <script>
 
         const Modelo_base = {
-            id : 0,
-            name : "",
-            apellido : "",
-            email : "",
+            id: 0,
+            name: "",
+            apellido: "",
+            email: "",
             nick: ""
         }
 
-        $(document).ready(() =>{
+        $(document).ready(() => {
 
             listaUsuarios();
         })
 
-        function mostrarModal(modelo){
+        function mostrarModal(modelo) {
 
             $("#txtIdUsuario").val(modelo.id);
             $("#txtNombre").val(modelo.name)
@@ -109,101 +109,101 @@
             let NuevoModelo = Modelo_base;
 
             NuevoModelo["id"] = $("#txtIdUsuario").val();
-            NuevoModelo["name"]  = $("#txtNombre").val();
-            NuevoModelo["apellido"]  = $("#txtApellido").val();
-            NuevoModelo["email"]  = $("#txtEmail").val();
+            NuevoModelo["name"] = $("#txtNombre").val();
+            NuevoModelo["apellido"] = $("#txtApellido").val();
+            NuevoModelo["email"] = $("#txtEmail").val();
             NuevoModelo["nick"] = $("#txtNick").val();
 
-            if($("#txtIdUsuario").val() == "0"){
-                fetch("Home/Insert",{
-                    method:"POST",
+            if ($("#txtIdUsuario").val() == "0") {
+                fetch("Home/Insert", {
+                    method: "POST",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
                     },
                     body: JSON.stringify(NuevoModelo)
                 })
-                .then((response) => {
-                    return response.ok ? response.json() : Promise.reject(response)
-                })
-                .then((dataJson) => {
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
 
-                    if(dataJson.valor){
-                        alert("registrado");
-                          $('.modal').modal('hide');
-                         listaUsuarios();
-                    }
-                })
-            }else{
-                fetch("Home/Update",{
-                    method:"PUT",
-                    headers: {
-                        'Content-Type': 'application/json;charset=utf-8'
-                    },
-                    body: JSON.stringify(NuevoModelo)
-                })
-                .then((response) => {
-                    return response.ok ? response.json() : Promise.reject(response)
-                })
-                .then((dataJson) => {
-
-                    if(dataJson.valor){
-                        alert("editado");
+                        if (dataJson.valor) {
+                            alert("registrado");
                             $('.modal').modal('hide');
                             listaUsuarios();
-                    }
+                        }
+                    })
+            } else {
+                fetch("Home/Update", {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(NuevoModelo)
                 })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+
+                        if (dataJson.valor) {
+                            alert("editado");
+                            $('.modal').modal('hide');
+                            listaUsuarios();
+                        }
+                    })
             }
         })
 
-        function listaUsuarios(){
+        function listaUsuarios() {
 
             fetch("Home/List")
-            .then((response) => {
-                return response.ok ? response.json() : Promise.reject(response)
-            })
-            .then((dataJson) => {
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
 
-                $("#tbUsuario tbody").html("");
+                    $("#tbUsuario tbody").html("");
 
-                dataJson.forEach((item) => {
+                    dataJson.forEach((item) => {
 
-                    $("#tbUsuario tbody").append(
-                        $("<tr>").append(
-                            $("<td>").text(item.name),
-                            $("<td>").text(item.apellido),
-                            $("<td>").text(item.email),
-                            $("<td>").text(item.nick),
-                            $("<td>").append(
-                                $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo",item).text("Editar"),
-                                $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id",item.id).text("Eliminar")
+                        $("#tbUsuario tbody").append(
+                            $("<tr>").append(
+                                $("<td>").text(item.name),
+                                $("<td>").text(item.apellido),
+                                $("<td>").text(item.email),
+                                $("<td>").text(item.nick),
+                                $("<td>").append(
+                                    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.id).text("Eliminar")
+                                )
                             )
                         )
-                    )
+                    })
                 })
-            })
         }
 
-        $("#tbUsuario tbody").on("click",".btn-editar",function(){
+        $("#tbUsuario tbody").on("click", ".btn-editar", function () {
             let usuario = $(this).data("modelo")
             mostrarModal(usuario)
         })
 
-        $("#tbUsuario tbody").on("click",".btn-eliminar",function(){
-        let idusuario = $(this).data("id")
-        console.log(idusuario)
-        let resultado = window.confirm("¿Desea eliminar el contacto?");
-            if(resultado){
-                fetch("Home/Delete?id=" + idusuario,{
-                    method:"DELETE"
+        $("#tbUsuario tbody").on("click", ".btn-eliminar", function () {
+            let idusuario = $(this).data("id")
+            console.log(idusuario)
+            let resultado = window.confirm("¿Desea eliminar el contacto?");
+            if (resultado) {
+                fetch("Home/Delete?id=" + idusuario, {
+                    method: "DELETE"
                 })
-                .then((response) => {
-                    return response.ok ? response.json() : Promise.reject(response)
-                })
-                .then((dataJson) => {
-                    if(dataJson.valor){
-                        listaUsuarios();
-                    }
-                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                        if (dataJson.valor) {
+                            listaUsuarios();
+                        }
+                    })
             }
         })
     </script>
