@@ -10,8 +10,8 @@ namespace ClownClub.Bussiness.Services
 		Task<usersLoggin> GetOne(int id);
 		Task<usersLoggin> GetOneByName(string name);
 		Task<IQueryable<usersLoggin>> GetAll();
+		Task<usersLoggin> GetUserByEmail(string email);
+        //añadir todas las operaciones que se quiera
 
-		//añadir todas las operaciones que se quiera
-
-	}
+    }
 }

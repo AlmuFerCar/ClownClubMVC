@@ -1,4 +1,4 @@
-﻿using ClownClub.Data.Repositories;
+﻿using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Models.loggin;
 
 namespace ClownClub.Bussiness.Services
@@ -36,5 +36,11 @@ namespace ClownClub.Bussiness.Services
 		{
 			return await _usersLogRepo.GetAll();
 		}
-	}
+        public async Task<usersLoggin> GetUserByEmail(string email)
+        {
+            IQueryable<usersLoggin> queryUsersLogginSQL = await _usersLogRepo.GetAll();
+            usersLoggin usersLoggin = queryUsersLogginSQL.Where(c => c.email == email).FirstOrDefault();
+            return usersLoggin;
+        }
+    }
 }

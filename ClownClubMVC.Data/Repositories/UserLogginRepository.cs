@@ -1,6 +1,6 @@
 ﻿using ClownClubMVC.Models.loggin;
 
-namespace ClownClub.Data.Repositories
+namespace ClownClubMVC.Data.Repositories
 {
 	public class UserLogginRepository : IGenericRepository<usersLoggin>
 	{

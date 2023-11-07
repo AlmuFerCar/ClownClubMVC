@@ -1,4 +1,4 @@
-﻿namespace ClownClub.Data.Repositories
+﻿namespace ClownClubMVC.Data.Repositories
 {
 	public interface IGenericRepository<TEntityModel> where TEntityModel : class
 	{

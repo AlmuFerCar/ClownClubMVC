@@ -1,6 +1,6 @@
 ﻿using ClownClubMVC.Models.loggin;
 using Microsoft.EntityFrameworkCore;
-namespace ClownClub.Data;
+namespace ClownClubMVC.Data;
 
 public class DataDBContext : DbContext
 {
@@ -13,4 +13,5 @@ public class DataDBContext : DbContext
 	{ }
 
 	public DbSet<usersLoggin> usersLoggin { get; set; }
+    public DbSet<passwordLoggin> passwordLoggin { get; set; }
 }

@@ -13,6 +13,34 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\almu.jpg",
+      "PackagePath": "staticwebassets\\img\\almu.jpg"
+    },
+    {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\baloncesto.jpg",
+      "PackagePath": "staticwebassets\\img\\baloncesto.jpg"
+    },
+    {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\comedia.jpg",
+      "PackagePath": "staticwebassets\\img\\comedia.jpg"
+    },
+    {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\correo.jpg",
+      "PackagePath": "staticwebassets\\img\\correo.jpg"
+    },
+    {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\malabares.jpg",
+      "PackagePath": "staticwebassets\\img\\malabares.jpg"
+    },
+    {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\mono.jpg",
+      "PackagePath": "staticwebassets\\img\\mono.jpg"
+    },
+    {
+      "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\teatro.jpg",
+      "PackagePath": "staticwebassets\\img\\teatro.jpg"
+    },
+    {
       "Id": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

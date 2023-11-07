@@ -20,6 +20,7 @@ namespace ClownClubMVC.WebApp.Controllers
         public ActionResult Index()
         {
             return View();
+            //return RedirectToAction("Login", "Acces");
         }
         [HttpGet]
         public async Task<ActionResult> List()
@@ -85,10 +86,6 @@ namespace ClownClubMVC.WebApp.Controllers
             return View();
         }
         public IActionResult Presentacion()
-        {
-            return View();
-        }
-        public IActionResult Usuarios()
         {
             return View();
         }
