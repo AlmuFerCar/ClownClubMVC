@@ -1,0 +1,28 @@
+﻿@model ClownClubMVC.WebApp.Models.ViewModels.VMLoggin
+
+@{
+    ViewData["Title"] = "Login";
+}
+
+<h2>Login</h2>
+
+@using (Html.BeginForm("Login", "Acces", FormMethod.Post))
+{
+    @Html.ValidationSummary()
+    <div class="form-group">
+        @Html.LabelFor(model => model.UserModel.email)
+        @Html.TextBoxFor(model => model.UserModel.email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.UserModel.email)
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.PasswordModel.pswdLoggin)
+        @Html.PasswordFor(model => model.PasswordModel.pswdLoggin, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.PasswordModel.pswdLoggin)
+    </div>
+
+    <button type="submit" class="btn btn-primary">Login</button>
+}
+
+<p>@Html.ValidationSummary(false, "", new { @class = "text-danger" })</p>
+
+

@@ -16,7 +16,7 @@ namespace ClownClubMVC.WebApp.Controllers
             _usersLogginService = userLogServ;
             _passwordLogginService = passwordLogServ;
         }
-        public ActionResult Loggin()
+        public ActionResult Login()
         {
             return View();
         }
@@ -43,17 +43,19 @@ namespace ClownClubMVC.WebApp.Controllers
             };
             bool answer = await _usersLogginService.Insert(newModel);
             await _passwordLogginService.Insert(newPassModel);
-            //return StatusCode(StatusCodes.Status200OK, new { valor = answer });
-            return RedirectToAction("Login", "Acces");
+            return StatusCode(StatusCodes.Status200OK, new { valor = answer });
         }
         [HttpPost]
-        public async Task<ActionResult> Login([FromBody] VMUsersLoggin modelo, VMPassword modeloPass)
+        public async Task<ActionResult> Login(VMLoggin modelo)
         {
-            if (modelo.email != null && modeloPass.pswdLoggin != null)
+            string email = modelo.UserModel.email;
+            string pswdLoggin = modelo.PasswordModel.pswdLoggin;
+
+            if (email != null && pswdLoggin != null)
             {
                 // Realiza la autenticación comparando el correo y el id
                 // y verifica que la contraseña coincida
-                bool isAuthenticated = await AuthenticateUser(modelo.email, modelo.id, modeloPass.pswdLoggin);
+                bool isAuthenticated = await AuthenticateUser(email, pswdLoggin);
 
                 if (isAuthenticated)
                 {
@@ -74,7 +76,7 @@ namespace ClownClubMVC.WebApp.Controllers
                 return View();
             }
         }
-        private async Task<bool> AuthenticateUser(string email, int userId, string password)
+        private async Task<bool> AuthenticateUser(string email, string password)
         {
             // Aquí debes implementar la lógica de autenticación
             // Consulta la base de datos o donde estén almacenados los usuarios y contraseñas
@@ -82,7 +84,7 @@ namespace ClownClubMVC.WebApp.Controllers
             // Por ejemplo, podrías usar los servicios _usersLogginService y _passwordLogginService
 
             usersLoggin user = await _usersLogginService.GetUserByEmail(email);
-            passwordLoggin pass = await _passwordLogginService.GetPasswordByUserId(userId);
+            passwordLoggin pass = await _passwordLogginService.GetPasswordByUserId(user.id);
 
             if (user != null && pass != null && pass.pswdLoggin == password)
             {

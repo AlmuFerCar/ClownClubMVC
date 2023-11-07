@@ -16,8 +16,8 @@ build_property.GenerateRazorMetadataSourceChecksumAttributes =
 build_property.MSBuildProjectDirectory = C:\Users\almfernandez\source\repos\ClownClubMVC\ClownClubMVC.WebApp
 build_property._RazorSourceGeneratorDebug = 
 
-[C:/Users/almfernandez/source/repos/ClownClubMVC/ClownClubMVC.WebApp/Views/Acces/Loggin.cshtml]
-build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNcTG9nZ2luLmNzaHRtbA==
+[C:/Users/almfernandez/source/repos/ClownClubMVC/ClownClubMVC.WebApp/Views/Acces/Login.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcQWNjZXNcTG9naW4uY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
 [C:/Users/almfernandez/source/repos/ClownClubMVC/ClownClubMVC.WebApp/Views/Acces/Register.cshtml]
