@@ -1,4 +1,3 @@
-using ClownClub.Bussiness.Services;
 using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Data;
 using ClownClubMVC.Models.loggin;
@@ -48,6 +47,6 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Acces}/{action=Login}/{id?}");
 
 app.Run();

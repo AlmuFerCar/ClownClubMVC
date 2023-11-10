@@ -63,6 +63,10 @@
                     <label>Nick</label>
                     <input type="text" class="form-control" id="txtNick" />
                 </div>
+                <div class="mb-2">
+                    <label>Contraseña</label>
+                    <input type="text" class="form-control" id="txtPassword" />
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
@@ -81,7 +85,8 @@
             name: "",
             apellido: "",
             email: "",
-            nick: ""
+            nick: "",
+            pswdLoggin: "",
         }
 
         $(document).ready(() => {
@@ -96,7 +101,7 @@
             $("#txtApellido").val(modelo.apellido)
             $("#txtEmail").val(modelo.email)
             $("#txtNick").val(modelo.nick)
-
+            $("#txtPassword").val(modelo.pswdLoggin)
             $('.modal').modal('show');
         }
 
@@ -113,9 +118,10 @@
             NuevoModelo["apellido"] = $("#txtApellido").val();
             NuevoModelo["email"] = $("#txtEmail").val();
             NuevoModelo["nick"] = $("#txtNick").val();
+            NuevoModelo["pswdLoggin"] = $("#txtPassword").val();
 
             if ($("#txtIdUsuario").val() == "0") {
-                fetch("Home/Insert", {
+                fetch("Insert", {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -134,7 +140,7 @@
                         }
                     })
             } else {
-                fetch("Home/Update", {
+                fetch("Update", {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -157,7 +163,7 @@
 
         function listaUsuarios() {
 
-            fetch("Home/List")
+            fetch("List")
                 .then((response) => {
                     return response.ok ? response.json() : Promise.reject(response)
                 })
@@ -193,7 +199,7 @@
             console.log(idusuario)
             let resultado = window.confirm("¿Desea eliminar el contacto?");
             if (resultado) {
-                fetch("Home/Delete?id=" + idusuario, {
+                fetch("Delete?id=" + idusuario, {
                     method: "DELETE"
                 })
                     .then((response) => {

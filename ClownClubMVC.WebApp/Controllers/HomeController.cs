@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ClownClub.Bussiness.Services;
+using ClownClubMVC.Business.Services;
 using ClownClubMVC.Models.loggin;
 using ClownClubMVC.WebApp.Models;
 using ClownClubMVC.WebApp.Models.ViewModels;
@@ -10,10 +10,12 @@ namespace ClownClubMVC.WebApp.Controllers
     public class HomeController : Controller
     {
         private readonly IUsersLogginService _usersLogginService;
+        private readonly IPasswordLogginService _passwordLogginService;
 
-        public HomeController(IUsersLogginService userLogServ)
+        public HomeController(IUsersLogginService userLogServ, IPasswordLogginService passLogServ)
         {
             _usersLogginService = userLogServ;
+            _passwordLogginService = passLogServ;
         }
 
         // GET: /Movies/
@@ -38,17 +40,37 @@ namespace ClownClubMVC.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Insert([FromBody] VMUsersLoggin modelo)
+        public async Task<ActionResult> Insert([FromBody] VMUserPasswordLog modelo)
         {
-            usersLoggin newModel = new usersLoggin()
+            try
             {
-                name = modelo.name,
-                apellido = modelo.apellido,
-                email = modelo.email,
-                nick = modelo.nick
-            };
-            bool answer = await _usersLogginService.Insert(newModel);
-            return StatusCode(StatusCodes.Status200OK, new { valor = answer });
+                usersLoggin newModel = new usersLoggin()
+                {
+                    name = modelo.name,
+                    apellido = modelo.apellido,
+                    email = modelo.email,
+                    nick = modelo.nick
+                };
+                bool answeruser = await _usersLogginService.Insert(newModel);
+                usersLoggin dataUser = await _usersLogginService.GetUserByEmail(modelo.email);
+                passwordLoggin newModelPass = new passwordLoggin()
+                {
+                    userLoggin_id = dataUser.id,
+                    pswdLoggin = modelo.pswdLoggin
+                };
+
+                
+                bool answerPass = await _passwordLogginService.Insert(newModelPass);
+                bool answer = answeruser && answerPass;
+                return StatusCode(StatusCodes.Status200OK, new { valor = answer });
+            }
+            catch (Exception ex)
+            {
+                // Log de la excepción
+                Console.WriteLine($"Error en la acción Insert: {ex.Message}");
+                return StatusCode(StatusCodes.Status500InternalServerError, new { error = ex.Message });
+            }
+
         }
 
         [HttpPut]
@@ -69,8 +91,9 @@ namespace ClownClubMVC.WebApp.Controllers
         [HttpDelete]
         public async Task<ActionResult> Delete(int id)
         {
-            bool answer = await _usersLogginService.Delete(id);
-            return StatusCode(StatusCodes.Status200OK, new { valor = answer });
+            bool answerPass = await _passwordLogginService.Delete(id);
+            bool answerUser = await _usersLogginService.Delete(id);
+            return StatusCode(StatusCodes.Status200OK, new { valor = answerPass && answerUser});
         }
 
         public IActionResult Privacy()
