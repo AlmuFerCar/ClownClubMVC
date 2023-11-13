@@ -1,5 +1,6 @@
 ﻿using ClownClubMVC.Business.Services;
 using ClownClubMVC.Models.loggin;
+using ClownClubMVC.Models.person;
 using ClownClubMVC.WebApp.Models.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -9,11 +10,13 @@ namespace ClownClubMVC.WebApp.Controllers
     {
         private readonly IUsersLogginService _usersLogginService;
         private readonly IPasswordLogginService _passwordLogginService;
+        private readonly IPersonService _personService;
 
-        public AccesController(IUsersLogginService userLogServ, IPasswordLogginService passwordLogServ)
+        public AccesController(IUsersLogginService userLogServ, IPasswordLogginService passwordLogServ, IPersonService personServ)
         {
             _usersLogginService = userLogServ;
             _passwordLogginService = passwordLogServ;
+            _personService = personServ;
         }
         public ActionResult Login()
         {
@@ -21,76 +24,116 @@ namespace ClownClubMVC.WebApp.Controllers
         }
         public ActionResult Register()
         {
-            return View();
+            var viewModel = new VMRegister();
+            // Puedes inicializar valores si es necesario
+            return View(viewModel);
         }
 
         [HttpPost]
-        public async Task<ActionResult> Insert([FromBody] VMUsersLoggin modelo, VMPassword modeloPass)
+        public async Task<ActionResult> Insert(VMRegister modelo)
         {
-            usersLoggin newModel = new usersLoggin()
+            if (ModelState.IsValid)
             {
-                name = modelo.name,
-                apellido = modelo.apellido,
-                email = modelo.email,
-                nick = modelo.nick
-            };
+                if (modelo.email != null && modelo.pswdLoggin != null)
+                {
+                    try
+                    {
+                        usersLoggin newModel = new usersLoggin()
+                        {
+                            name = modelo.name,
+                            apellido = modelo.apellido,
+                            email = modelo.email,
+                            nick = modelo.nick
+                        };
+                        bool answeruser = await _usersLogginService.Insert(newModel);
+                        usersLoggin dataUser = await _usersLogginService.GetUserByEmail(modelo.email);
+                        passwordLoggin newModelPass = new passwordLoggin()
+                        {
+                            userLoggin_id = dataUser.id,
+                            pswdLoggin = modelo.pswdLoggin
+                        };
+                        person newModelPerson = new person()
+                        {
+                            userLoggin_id = dataUser.id,
+                            rolePerson = modelo.rolePerson,
+                            age = modelo.age,
+                        };
+                        bool answerPass = await _passwordLogginService.Insert(newModelPass);
+                        bool answerPerson = await _personService.Insert(newModelPerson);
 
-            passwordLoggin newPassModel = new passwordLoggin()
-            {
-                userLoggin_id = modelo.id,
-                pswdLoggin = modeloPass.pswdLoggin
-            };
-            bool answer = await _usersLogginService.Insert(newModel);
-            await _passwordLogginService.Insert(newPassModel);
-            return StatusCode(StatusCodes.Status200OK, new { valor = answer });
+                        if (answeruser && answerPass && answerPerson)
+                        {
+                            return RedirectToAction("Login", "Acces");
+                        }
+                        return StatusCode(StatusCodes.Status200OK, new { valor = answeruser && answerPass && answerPerson });
+                    }
+                    catch (Exception ex)
+                    {
+                        // Log de la excepción
+                        Console.WriteLine($"Error en la acción Insert: {ex.Message}");
+                        return StatusCode(StatusCodes.Status500InternalServerError, new { error = ex.Message });
+                    }
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Campos requeridos, no pueden estar vacios");
+                    return RedirectToAction("Register", "Acces");
+                }
+            }
+            return View("Register", modelo);
         }
         [HttpPost]
-        public async Task<ActionResult> Login(VMLoggin modelo)
+        public async Task<ActionResult> Login(VMLog modelo)
         {
-            string email = modelo.UserModel.email;
-            string pswdLoggin = modelo.PasswordModel.pswdLoggin;
+            string email = modelo.email;
+            string pswdLoggin = modelo.pswdLoggin;
 
             if (email != null && pswdLoggin != null)
             {
-                // Realiza la autenticación comparando el correo y el id
-                // y verifica que la contraseña coincida
                 bool isAuthenticated = await AuthenticateUser(email, pswdLoggin);
 
                 if (isAuthenticated)
                 {
-                    // Usuario autenticado, puedes redirigirlo a la página principal o a otra vista
-                    return RedirectToAction("Index", "Home");
+                    if (await IsUser(email))
+                    {
+                        return RedirectToAction("Aficiones", "Home");
+                    }
+                    else 
+                    {
+                        return RedirectToAction("Index", "Home");
+                    }
                 }
                 else
                 {
-                    // Autenticación fallida, puedes mostrar un mensaje de error en la vista Login
                     ModelState.AddModelError(string.Empty, "Credenciales incorrectas");
-                    return View();
                 }
             }
-            else
-            {
-                // Los campos email y pswdLoggin son requeridos, puedes manejar esto en la vista
-                ModelState.AddModelError(string.Empty, "Por favor, complete todos los campos requeridos.");
-                return View();
-            }
+            return View();
         }
         private async Task<bool> AuthenticateUser(string email, string password)
         {
-            // Aquí debes implementar la lógica de autenticación
-            // Consulta la base de datos o donde estén almacenados los usuarios y contraseñas
-            // para verificar si los datos son correctos
-            // Por ejemplo, podrías usar los servicios _usersLogginService y _passwordLogginService
-
             usersLoggin user = await _usersLogginService.GetUserByEmail(email);
-            passwordLoggin pass = await _passwordLogginService.GetPasswordByUserId(user.id);
-
-            if (user != null && pass != null && pass.pswdLoggin == password)
+            if (user != null)
             {
-                return true; // Autenticación exitosa
+                passwordLoggin pass = await _passwordLogginService.GetPasswordByUserId(user.id);
+                if (user != null && pass != null && pass.pswdLoggin == password)
+                {
+                    return true; // Autenticación exitosa
+                }
             }
-
             return false; // Autenticación fallida
+        }
+
+        private async Task<bool> IsUser(String email)
+        {
+            bool isUser = true;
+            usersLoggin user = await _usersLogginService.GetUserByEmail(email);
+            person rolePerson = await _personService.GetUserByIdLogin(user.id);
+            if (rolePerson.rolePerson.Equals("administrator"))
+            {
+                isUser = false;
+            }
+            return isUser;
         }
     }
 }

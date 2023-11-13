@@ -3,6 +3,7 @@ using ClownClubMVC.Data;
 using ClownClubMVC.Models.loggin;
 using Microsoft.EntityFrameworkCore;
 using ClownClubMVC.Business.Services;
+using ClownClubMVC.Models.person;
 
 var builder = WebApplication.CreateBuilder(args);
 string proyectoRaiz = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\.."));
@@ -21,8 +22,10 @@ builder.Services.AddDbContext<DataDBContext>(options =>
 
 builder.Services.AddScoped<IGenericRepository<usersLoggin>, UserLogginRepository>();
 builder.Services.AddScoped<IGenericRepository<passwordLoggin>, PasswordLogginRepository>();
+builder.Services.AddScoped<IGenericRepository<person>, PersonRepository>();
 builder.Services.AddScoped<IUsersLogginService, UsersLogginService>();
 builder.Services.AddScoped<IPasswordLogginService, PasswordLogginService>();
+builder.Services.AddScoped<IPersonService, PersonService>();
 
 
 // Add services to the container.

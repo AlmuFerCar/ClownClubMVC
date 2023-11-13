@@ -39,5 +39,9 @@ namespace ClownClubMVC.Data.Repositories
             IQueryable<passwordLoggin> queryPasswordLogginSQL = _dbContext.passwordLoggin;
             return queryPasswordLogginSQL;
         }
+        public void checkPassword(passwordLoggin modelo)
+        { 
+            
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿@model ClownClubMVC.WebApp.Models.ViewModels.VMLoggin
+﻿@model ClownClubMVC.WebApp.Models.ViewModels.VMLog
 
 @{
     ViewData["Title"] = "Login";
@@ -8,21 +8,24 @@
 
 @using (Html.BeginForm("Login", "Acces", FormMethod.Post))
 {
-    @Html.ValidationSummary()
     <div class="form-group">
-        @Html.LabelFor(model => model.UserModel.email)
-        @Html.TextBoxFor(model => model.UserModel.email, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.UserModel.email)
+        @Html.LabelFor(model => model.email)
+        @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.PasswordModel.pswdLoggin)
-        @Html.PasswordFor(model => model.PasswordModel.pswdLoggin, new { @class = "form-control" })
-        @Html.ValidationMessageFor(model => model.PasswordModel.pswdLoggin)
+        @Html.LabelFor(model => model.pswdLoggin)
+        @Html.PasswordFor(model => model.pswdLoggin, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.pswdLoggin, "", new { @class = "text-danger" })
     </div>
+    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+    <p>
+        Si no tienes cuenta,
+        <a asp-action="Register" asp-controller="Acces">regístrate aquí</a>.
+    </p>
 
     <button type="submit" class="btn btn-primary">Login</button>
 }
 
-<p>@Html.ValidationSummary(false, "", new { @class = "text-danger" })</p>
 
 

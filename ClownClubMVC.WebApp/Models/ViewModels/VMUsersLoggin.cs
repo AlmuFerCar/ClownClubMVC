@@ -7,5 +7,5 @@
 		public string apellido { get; set; }
 		public string email { get; set; }
 		public string nick { get; set; }
-	}
+    }
 }

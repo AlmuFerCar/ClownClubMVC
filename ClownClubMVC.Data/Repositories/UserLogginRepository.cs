@@ -39,11 +39,5 @@ namespace ClownClubMVC.Data.Repositories
 			IQueryable<usersLoggin> queryUsersLogginSQL = _dbContext.usersLoggin;
 			return queryUsersLogginSQL;
 		}
-
-
-
-
-
-
 	}
 }

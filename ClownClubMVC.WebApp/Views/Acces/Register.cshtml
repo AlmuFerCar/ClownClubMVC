@@ -1,5 +1,53 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model ClownClubMVC.WebApp.Models.ViewModels.VMRegister
+
 @{
+    ViewData["Title"] = "Register";
+}
+
+<h2>Register</h2>
+
+@using (Html.BeginForm("Insert", "Acces", FormMethod.Post))
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.name)
+        @Html.TextBoxFor(model => model.name, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.name, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.apellido)
+        @Html.TextBoxFor(model => model.apellido, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.apellido, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.email)
+        @Html.TextBoxFor(model => model.email, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.nick)
+        @Html.TextBoxFor(model => model.nick, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.nick, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.pswdLoggin)
+        @Html.PasswordFor(model => model.pswdLoggin, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.pswdLoggin, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.rolePerson)
+        @Html.DropDownListFor(model => model.rolePerson, new SelectList(Model.AvailableRoles, "Value", "Text"), new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.rolePerson, "", new { @class = "text-danger" })
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.age)
+        @Html.TextBoxFor(model => model.age, new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.age, "", new { @class = "text-danger" })
+    </div>
+    <button type="submit" class="btn btn-primary">Register</button>
 }
