@@ -1,5 +1,4 @@
-﻿using ClownClubMVC.Models.loggin;
-using ClownClubMVC.Models.person;
+﻿using ClownClubMVC.Models.person;
 
 namespace ClownClubMVC.Data.Repositories
 {

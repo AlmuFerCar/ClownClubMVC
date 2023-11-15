@@ -99,7 +99,7 @@ namespace ClownClubMVC.WebApp.Controllers
                 {
                     if (await IsUser(email))
                     {
-                        return RedirectToAction("Content", "Content");
+                        return RedirectToAction("ContentView", "Content");
                     }
                     else 
                     {
@@ -121,10 +121,10 @@ namespace ClownClubMVC.WebApp.Controllers
                 passwordLoggin pass = await _passwordLogginService.GetPasswordByUserId(user.id);
                 if (user != null && pass != null && pass.pswdLoggin == password)
                 {
-                    return true; // Autenticación exitosa
+                    return true;
                 }
             }
-            return false; // Autenticación fallida
+            return false;
         }
         private async Task<bool> IsUser(String email)
         {

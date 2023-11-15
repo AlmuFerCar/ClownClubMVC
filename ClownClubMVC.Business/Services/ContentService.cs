@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClownClubMVC.Business.Services.Interfaces;
+﻿using ClownClubMVC.Business.Services.Interfaces;
 using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Models.content;
-using ClownClubMVC.Models.person;
 
 namespace ClownClubMVC.Business.Services
 {

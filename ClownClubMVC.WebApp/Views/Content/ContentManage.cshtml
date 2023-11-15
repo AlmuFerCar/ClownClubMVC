@@ -232,7 +232,6 @@
 
         $("#tbContenido tbody").on("click", ".btn-eliminar", function () {
             let idcontenido= $(this).data("id")
-            console.log(idcontenido)
             let resultado = window.confirm("¿Desea eliminar el contenido?");
             if (resultado) {
                 fetch("Delete?id=" + idcontenido, {

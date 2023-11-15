@@ -33,7 +33,6 @@ namespace ClownClubMVC.Data.Repositories
 		{
 			return await _dbContext.usersLoggin.FindAsync(id);
 		}
-
 		public async Task<IQueryable<usersLoggin>> GetAll()
 		{
 			IQueryable<usersLoggin> queryUsersLogginSQL = _dbContext.usersLoggin;

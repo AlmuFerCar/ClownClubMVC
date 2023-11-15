@@ -1,0 +1,153 @@
+﻿﻿﻿@{
+    ViewData["Title"] = "Lista Contenido";
+}
+
+<div class="row">
+    <div class="col-sm-12">
+        <div class="card">
+            <div class="card-header">Contenidos</div>
+            <div class="card-body">
+                <hr/>
+                <table class="table table-striped" id="tbContenido">
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Duración</th>
+                            <th>Visitas</th>
+                            <th>Idioma</th>
+                            <th>Cartel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Inicio Modal-->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle Contenido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <!-- Columna izquierda para la imagen -->
+                            <div class="mb-2">
+                                <img src="" alt="Imagen" style="max-width: 100%;" id="imgPreview" />
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <!-- Columna derecha para el resto de la información -->
+                            <div class="mb-2">
+                                <label>Titulo</label>
+                                <p id="txtTitulo" class="form-control-static"></p>
+                            </div>
+                            <div class="mb-2">
+                                <label>Duración</label>
+                                <p id="txtDuracion" class="form-control-static"></p>
+                            </div>
+                            <div class="mb-2">
+                                <label>Tamaño</label>
+                                <p id="txtTamanio" class="form-control-static"></p>
+                            </div>
+                            <div class="mb-2">
+                                <label>Visitas</label>
+                                <p id="txtVisitas" class="form-control-static"></p>
+                            </div>
+                            <div class="mb-2">
+                                <label>Idioma</label>
+                                <p id="txtIdioma" class="form-control-static"></p>
+                            </div>
+                            <div class="mb-2">
+                                <label>Formato</label>
+                                <p id="txtFormato" class="form-control-static"></p>
+                            </div>
+                            <div class="mb-2">
+                                <label>Productor</label>
+                                <p id="txtProductor" class="form-control-static"></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!--Fin Modal-->
+@section Scripts{
+
+    <script>
+
+        const Modelo_base = {
+            id: 0,
+            title: "",
+            duration: "",
+            size: "",
+            viewsContent: "",
+            languageContent: "",
+            formatContent: "",
+            producer: "",
+            imageUrl: "",
+        }
+
+        $(document).ready(() => {
+
+            listaContenidos();
+        })
+
+        function mostrarModal(modelo) {
+
+            $("#txtIdContenido").text(modelo.id);
+            $("#txtTitulo").text(modelo.title)
+            $("#txtDuracion").text(modelo.duration)
+            $("#txtTamanio").text(modelo.size)
+            $("#txtVisitas").text(modelo.viewsContent)
+            $("#txtIdioma").text(modelo.languageContent)
+            $("#txtFormato").text(modelo.formatContent)
+            $("#txtProductor").text(modelo.producer)
+            $("#imgPreview").attr("src", modelo.imageUrl);;
+            $('.modal').modal('show');
+        }
+
+        function listaContenidos() {
+        fetch("ListView")
+            .then((response) => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then((dataJson) => {
+
+                $("#tbContenido tbody").html("");
+
+                dataJson.forEach((item) => {
+
+                    $("#tbContenido tbody").append(
+                        $("<tr>").append(
+                            $("<td>").text(item.title),
+                            $("<td>").text(item.duration),
+                            $("<td>").text(item.viewsContent),
+                            $("<td>").text(item.languageContent),
+                            $("<td>").append(
+                                $("<img>").addClass("imagen-contenido").attr({ src: item.imageUrl, alt: "Imagen" }),
+                            ),
+                            $("<td>").append(
+                                $("<button>").addClass("btn btn-success btn-sm btn-details").data("modelo", item).text("+ Info")
+                            )
+                        )
+                    )
+                })
+            })
+        }
+        $("#tbContenido tbody").on("click", ".btn-details", function () {
+            let contenido = $(this).data("modelo")
+            mostrarModal(contenido)
+        })
+    </script>
+}

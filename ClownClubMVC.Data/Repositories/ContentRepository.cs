@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClownClubMVC.Models.content;
-using ClownClubMVC.Models.loggin;
-
+﻿using ClownClubMVC.Models.content;
 namespace ClownClubMVC.Data.Repositories
 {
     public class ContentRepository : IGenericRepository<content>

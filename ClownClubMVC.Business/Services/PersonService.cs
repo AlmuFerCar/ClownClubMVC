@@ -1,6 +1,5 @@
 ﻿using ClownClubMVC.Business.Services.Interfaces;
 using ClownClubMVC.Data.Repositories;
-using ClownClubMVC.Models.loggin;
 using ClownClubMVC.Models.person;
 
 namespace ClownClubMVC.Business.Services

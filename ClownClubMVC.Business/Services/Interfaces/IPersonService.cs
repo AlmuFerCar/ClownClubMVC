@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ClownClubMVC.Models.loggin;
-using ClownClubMVC.Models.person;
+﻿using ClownClubMVC.Models.person;
 
 namespace ClownClubMVC.Business.Services.Interfaces
 {
@@ -16,7 +10,5 @@ namespace ClownClubMVC.Business.Services.Interfaces
         Task<person> GetOne(int id);
         Task<IQueryable<person>> GetAll();
         Task<person> GetUserByIdLogin(int id);
-
-        //añadir todas las operaciones que se quiera
     }
 }

@@ -11,7 +11,5 @@ namespace ClownClubMVC.Business.Services.Interfaces
         Task<usersLoggin> GetOneByName(string name);
         Task<IQueryable<usersLoggin>> GetAll();
         Task<usersLoggin> GetUserByEmail(string email);
-        //añadir todas las operaciones que se quiera
-
     }
 }

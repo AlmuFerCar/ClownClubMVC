@@ -14,9 +14,31 @@ namespace ClownClubMVC.WebApp.Controllers
         {
             _contentService = contentServ;
         }
-        public IActionResult Content()
+        public IActionResult ContentManage()
         {
             return View();
+        }
+        public IActionResult ContentView()
+        {
+            return View();
+        }
+        public ActionResult Details(int id)
+        {
+            return View();
+        }
+        public async Task<ActionResult> ListView()
+        {
+            IQueryable<content> queryContentSQL = await _contentService.GetAll();
+            List<VMContent> list = queryContentSQL.Select(c => new VMContent()
+            {
+                id = c.id,
+                title = c.title,
+                duration = c.duration,
+                viewsContent = c.viewsContent,
+                languageContent = c.languageContent,
+                imageUrl = c.imageUrl
+            }).ToList();
+            return StatusCode(StatusCodes.Status200OK, list);
         }
         [HttpGet]
         public async Task<ActionResult> List()
