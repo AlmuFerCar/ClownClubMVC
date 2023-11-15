@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using ClownClubMVC.Models.loggin;
 
-namespace ClownClubMVC.Business.Services
+namespace ClownClubMVC.Business.Services.Interfaces
 {
     public interface IPasswordLogginService
     {
@@ -13,7 +13,7 @@ namespace ClownClubMVC.Business.Services
         Task<bool> Update(passwordLoggin modelo);
         Task<bool> Delete(int id);
         Task<passwordLoggin> GetOne(int id);
-        Task <passwordLoggin> GetPasswordByUserId(int id);
+        Task<passwordLoggin> GetPasswordByUserId(int id);
         Task<IQueryable<passwordLoggin>> GetAll();
 
         //añadir todas las operaciones que se quiera

@@ -6,6 +6,8 @@ using ClownClubMVC.Business.Services;
 using ClownClubMVC.Models.person;
 using ClownClubMVC.WebApp.Controllers.StrategyFactoryPattern;
 using ClownClubMVC.WebApp.Controllers.StrategyValidations;
+using ClownClubMVC.Business.Services.Interfaces;
+using ClownClubMVC.Models.content;
 
 var builder = WebApplication.CreateBuilder(args);
 string proyectoRaiz = Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "..\\..\\.."));
@@ -25,9 +27,11 @@ builder.Services.AddDbContext<DataDBContext>(options =>
 builder.Services.AddScoped<IGenericRepository<usersLoggin>, UserLogginRepository>();
 builder.Services.AddScoped<IGenericRepository<passwordLoggin>, PasswordLogginRepository>();
 builder.Services.AddScoped<IGenericRepository<person>, PersonRepository>();
+builder.Services.AddScoped<IGenericRepository<content>, ContentRepository>();
 builder.Services.AddScoped<IUsersLogginService, UsersLogginService>();
 builder.Services.AddScoped<IPasswordLogginService, PasswordLogginService>();
 builder.Services.AddScoped<IPersonService, PersonService>();
+builder.Services.AddScoped<IContentService, ContentService>();
 builder.Services.AddScoped<ValidatePasswordPattern>();
 builder.Services.AddScoped<StrategyFactory>();
 

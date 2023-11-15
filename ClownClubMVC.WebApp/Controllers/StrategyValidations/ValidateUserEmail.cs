@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.WebApp.Controllers.Interfaces;
+﻿using ClownClubMVC.WebApp.Controllers.InterfacesStrategy;
 using System.Text.RegularExpressions;
 
 namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
@@ -9,11 +9,9 @@ namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
         {
             if (!Regex.IsMatch(inputs[0], @"^\w+([-+.]\w+)*@\w+([-.]\w+)*\.\w+([-.]\w+)*$"))
             {
-                Console.WriteLine("ERROR: The email doesn't meet the proper format");
                 return false;
             }
             return true;
         }
-
     }
 }

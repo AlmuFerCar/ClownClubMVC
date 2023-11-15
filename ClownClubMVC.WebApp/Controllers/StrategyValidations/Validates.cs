@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.WebApp.Controllers.Interfaces;
+﻿using ClownClubMVC.WebApp.Controllers.InterfacesStrategy;
 
 namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
 {
@@ -14,14 +14,5 @@ namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
         {
             return _checkStrategy.Validate(inputs);
         }
-        //public bool CheckUserRepeated(string username, GenericList<User> userlist)
-        //{
-        //    if (userlist.GetList().Any(user => user.Username == username))
-        //    {
-        //        Console.WriteLine("The username is already in use.");
-        //        return false;
-        //    }
-        //    return true;
-        //}
     }
 }

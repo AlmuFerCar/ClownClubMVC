@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.WebApp.Controllers.Interfaces;
+﻿using ClownClubMVC.WebApp.Controllers.InterfacesStrategy;
 
 namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
 {
@@ -6,9 +6,8 @@ namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
     {
         public bool Validate(params string[] inputs)
         {
-            if (inputs[0].Length < 8)
+            if (inputs[0].Length < 10)
             {
-                Console.WriteLine("ERROR: The password must be at least 8 characters.");
                 return false;
             }
             return true;

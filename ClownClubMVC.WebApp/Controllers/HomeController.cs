@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ClownClubMVC.Business.Services;
+using ClownClubMVC.Business.Services.Interfaces;
 using ClownClubMVC.Models.loggin;
 using ClownClubMVC.WebApp.Models;
 using ClownClubMVC.WebApp.Models.ViewModels;
@@ -22,7 +22,6 @@ namespace ClownClubMVC.WebApp.Controllers
         public ActionResult Index()
         {
             return View();
-            //return RedirectToAction("Login", "Acces");
         }
         [HttpGet]
         public async Task<ActionResult> List()
@@ -32,7 +31,7 @@ namespace ClownClubMVC.WebApp.Controllers
             {
                 id = c.id,
                 name = c.name,
-                apellido = c.apellido,
+                surname = c.surname,
                 email = c.email,
                 nick = c.nick
             }).ToList();
@@ -47,7 +46,7 @@ namespace ClownClubMVC.WebApp.Controllers
                 usersLoggin newModel = new usersLoggin()
                 {
                     name = modelo.name,
-                    apellido = modelo.apellido,
+                    surname = modelo.surname,
                     email = modelo.email,
                     nick = modelo.nick
                 };
@@ -70,7 +69,6 @@ namespace ClownClubMVC.WebApp.Controllers
                 Console.WriteLine($"Error en la acción Insert: {ex.Message}");
                 return StatusCode(StatusCodes.Status500InternalServerError, new { error = ex.Message });
             }
-
         }
 
         [HttpPut]
@@ -80,7 +78,7 @@ namespace ClownClubMVC.WebApp.Controllers
             {
                 id = modelo.id,
                 name = modelo.name,
-                apellido = modelo.apellido,
+                surname = modelo.surname,
                 email = modelo.email,
                 nick = modelo.nick
             };

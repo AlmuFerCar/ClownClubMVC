@@ -1,9 +1,10 @@
-﻿using ClownClubMVC.Data.Repositories;
+﻿using ClownClubMVC.Business.Services.Interfaces;
+using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Models.loggin;
 
 namespace ClownClubMVC.Business.Services
 {
-	public class UsersLogginService : IUsersLogginService
+    public class UsersLogginService : IUsersLogginService
 	{
 		private readonly IGenericRepository<usersLoggin> _usersLogRepo;
 		public UsersLogginService(IGenericRepository<usersLoggin> usersLogRepo)

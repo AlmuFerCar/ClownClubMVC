@@ -8,7 +8,7 @@ namespace ClownClubMVC.WebApp.Models.ViewModels
         [DisplayName("Nombre")]
         public string name { get; set; }
         [DisplayName("Apellido")]
-        public string apellido { get; set; }
+        public string surname { get; set; }
         [DisplayName("Correo electrónico")]
         public string email { get; set; }
         [DisplayName("Nombre usuario")]

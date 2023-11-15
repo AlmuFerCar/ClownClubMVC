@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ClownClubMVC.Models.loggin;
 using ClownClubMVC.Models.person;
 
-namespace ClownClubMVC.Business.Services
+namespace ClownClubMVC.Business.Services.Interfaces
 {
     public interface IPersonService
     {

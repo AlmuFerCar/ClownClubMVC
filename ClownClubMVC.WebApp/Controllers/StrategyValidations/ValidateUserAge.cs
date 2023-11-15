@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.WebApp.Controllers.Interfaces;
+﻿using ClownClubMVC.WebApp.Controllers.InterfacesStrategy;
 
 namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
 {
@@ -20,6 +20,5 @@ namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
                 throw new ArgumentException("El dato de edad no es un número válido.");
             }
         }
-
     }
 }

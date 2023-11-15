@@ -1,0 +1,252 @@
+﻿﻿﻿@{
+    ViewData["Title"] = "Lista Contenido";
+}
+
+
+<div class="row">
+    <div class="col-sm-12">
+
+        <!--Inicio tarjeta-->
+        <div class="card">
+            <div class="card-header">Contenidos</div>
+            <div class="card-body">
+
+                <button class="btn btn-success" id="btnNuevo">Nuevo Contenido</button>
+
+                <hr />
+
+                <table class="table table-striped" id="tbContenido">
+                    <thead>
+                        <tr>
+                            <th>Titulo</th>
+                            <th>Duración</th>
+                            <th>Tamaño</th>
+                            <th>Visitas</th>
+                            <th>Idioma</th>
+                            <th>Formato</th>
+                            <th>Productor</th>
+                            <th>Cartel</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+        <!--Fin tarjeta-->
+
+    </div>
+</div>
+
+
+
+<!--Inicio Modal-->
+<div class="modal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Detalle Contenido</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" id="txtIdContenido" value="0" />
+                <div class="mb-2">
+                    <label>Titulo</label>
+                    <input type="text" class="form-control" id="txtTitulo" />
+                </div>
+                <div class="mb-2">
+                    <label>Duración</label>
+                    <input type="text" class="form-control" id="txtDuracion" />
+                </div>
+                <div class="mb-2">
+                    <label>Tamaño</label>
+                    <input type="text" class="form-control" id="txtTamanio" />
+                </div>
+                <div class="mb-2">
+                    <label>Visitas</label>
+                    <input type="text" class="form-control" id="txtVisitas" />
+                </div>
+                <div class="mb-2">
+                    <label>Idioma</label>
+                    <input type="text" class="form-control" id="txtIdioma" />
+                </div>
+                <div class="mb-2">
+                    <label>Formato</label>
+                    <input type="text" class="form-control" id="txtFormato" />
+                </div>
+                <div class="mb-2">
+                    <label>Productor</label>
+                    <input type="text" class="form-control" id="txtProductor" />
+                </div>
+                <div class="mb-2">
+                    <label>Imagen</label>
+                    <img src="" alt="Imagen" style="max-width: 200px;" id="imgPreview" />
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btnGuardar">Guardar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3 text-center">
+        <a href="@Url.Action("Management", "Management")" class="btn btn-link">Volver a Administrar</a>
+    </div>
+</div>
+<!--Fin Modal-->
+@section Scripts{
+
+    <script>
+
+        const Modelo_base = {
+            id: 0,
+            title: "",
+            duration: "",
+            size: "",
+            viewsContent: "",
+            languageContent: "",
+            formatContent: "",
+            producer: "",
+            imageUrl: "",
+        }
+
+        $(document).ready(() => {
+
+            listaContenidos();
+        })
+
+        function mostrarModal(modelo) {
+
+            $("#txtIdContenido").val(modelo.id);
+            $("#txtTitulo").val(modelo.title)
+            $("#txtDuracion").val(modelo.duration)
+            $("#txtTamanio").val(modelo.size)
+            $("#txtVisitas").val(modelo.viewsContent)
+            $("#txtIdioma").val(modelo.languageContent)
+            $("#txtFormato").val(modelo.formatContent)
+            $("#txtProductor").val(modelo.producer)
+            $("#imgPreview").val(modelo.imageUrl);
+            $('.modal').modal('show');
+        }
+
+        $("#btnNuevo").click(() => {
+
+            mostrarModal(Modelo_base);
+        })
+
+        $("#btnGuardar").click(() => {
+            let NuevoModelo = Modelo_base;
+
+            NuevoModelo["id"] = $("#txtIdContenido").val();
+            NuevoModelo["title"] = $("#txtTitulo").val();
+            NuevoModelo["duration"] = $("#txtDuracion").val();
+            NuevoModelo["size"] = $("#txtTamanio").val();
+            NuevoModelo["viewsContent"] = $("#txtVisitas").val();
+            NuevoModelo["languageContent"] = $("#txtIdioma").val();
+            NuevoModelo["formatContent"] = $("#txtFormato").val();
+            NuevoModelo["producer"] = $("#txtProductor").val();
+            NuevoModelo["imageUrl"] = $("#imgPreview").val();
+
+            if ($("#txtIdContenido").val() == "0") {
+                fetch("Insert", {
+                    method: "POST",
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(NuevoModelo)
+                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+
+                        if (dataJson.valor) {
+                            alert("creado");
+                            $('.modal').modal('hide');
+                            listaUsuarios();
+                        }
+                    })
+            } else {
+                fetch("Update", {
+                    method: "PUT",
+                    headers: {
+                        'Content-Type': 'application/json;charset=utf-8'
+                    },
+                    body: JSON.stringify(NuevoModelo)
+                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+
+                        if (dataJson.valor) {
+                            alert("editado");
+                            $('.modal').modal('hide');
+                            listaUsuarios();
+                        }
+                    })
+            }
+        })
+
+        function listaContenidos() {
+
+            fetch("List")
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+
+                    $("#tbContenido tbody").html("");
+
+                    dataJson.forEach((item) => {
+
+                        $("#tbContenido tbody").append(
+                            $("<tr>").append(
+                                $("<td>").text(item.title),
+                                $("<td>").text(item.duration),
+                                $("<td>").text(item.size),
+                                $("<td>").text(item.viewsContent),
+                                $("<td>").text(item.languageContent),
+                                $("<td>").text(item.formatContent),
+                                $("<td>").text(item.producer),
+                                $("<td>").append(
+                                    $("<img>").addClass("imagen-contenido").attr({ src: item.imageUrl, alt: "Imagen" }),
+                                ),
+                                $("<td>").append(
+                                    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
+                                    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.id).text("Eliminar")
+                                )
+                            )
+                        )
+                    })
+                })
+        }
+
+        $("#tbContenido tbody").on("click", ".btn-editar", function () {
+            let contenido = $(this).data("modelo")
+            mostrarModal(contenido)
+        })
+
+        $("#tbContenido tbody").on("click", ".btn-eliminar", function () {
+            let idcontenido= $(this).data("id")
+            console.log(idcontenido)
+            let resultado = window.confirm("¿Desea eliminar el contenido?");
+            if (resultado) {
+                fetch("Delete?id=" + idcontenido, {
+                    method: "DELETE"
+                })
+                    .then((response) => {
+                        return response.ok ? response.json() : Promise.reject(response)
+                    })
+                    .then((dataJson) => {
+                        if (dataJson.valor) {
+                            listaContenidos();
+                        }
+                    })
+            }
+        })
+    </script>
+}

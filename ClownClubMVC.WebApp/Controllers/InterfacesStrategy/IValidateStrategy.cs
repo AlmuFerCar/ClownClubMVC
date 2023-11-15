@@ -1,4 +1,4 @@
-﻿namespace ClownClubMVC.WebApp.Controllers.Interfaces
+﻿namespace ClownClubMVC.WebApp.Controllers.InterfacesStrategy
 {
     public interface IValidateStrategy
     {

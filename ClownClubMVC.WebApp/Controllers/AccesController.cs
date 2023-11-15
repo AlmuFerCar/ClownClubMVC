@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.Business.Services;
+﻿using ClownClubMVC.Business.Services.Interfaces;
 using ClownClubMVC.Models.loggin;
 using ClownClubMVC.Models.person;
 using ClownClubMVC.WebApp.Controllers.StrategyFactoryPattern;
@@ -27,7 +27,6 @@ namespace ClownClubMVC.WebApp.Controllers
         public ActionResult Register()
         {
             var viewModel = new VMRegister();
-            // Puedes inicializar valores si es necesario
             return View(viewModel);
         }
 
@@ -43,12 +42,12 @@ namespace ClownClubMVC.WebApp.Controllers
                 {
                     try
                     {
-                        if (checkDataRegister(modelo))
+                        if (checkDataRegister(modelo) && await IsRepeatEmail(modelo) && await IsRepeatNick(modelo))
                         {
                             usersLoggin newModel = new usersLoggin()
                             {
                                 name = modelo.name,
-                                apellido = modelo.apellido,
+                                surname = modelo.surname,
                                 email = modelo.email,
                                 nick = modelo.nick
                             };
@@ -75,8 +74,6 @@ namespace ClownClubMVC.WebApp.Controllers
                     }
                     catch (Exception ex)
                     {
-                        // Log de la excepción
-                        Console.WriteLine($"Error en la acción Insert: {ex.Message}");
                         return StatusCode(StatusCodes.Status500InternalServerError, new { error = ex.Message });
                     }
                 }
@@ -102,11 +99,11 @@ namespace ClownClubMVC.WebApp.Controllers
                 {
                     if (await IsUser(email))
                     {
-                        return RedirectToAction("Aficiones", "Home");
+                        return RedirectToAction("Content", "Content");
                     }
                     else 
                     {
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("Management", "Management");
                     }
                 }
                 else
@@ -129,7 +126,6 @@ namespace ClownClubMVC.WebApp.Controllers
             }
             return false; // Autenticación fallida
         }
-
         private async Task<bool> IsUser(String email)
         {
             bool isUser = true;
@@ -141,26 +137,50 @@ namespace ClownClubMVC.WebApp.Controllers
             }
             return isUser;
         }
+        private async Task<bool> IsRepeatNick(VMRegister modelo)
+        {
+            bool isRepeatNick = false;
+            IQueryable<usersLoggin> queryUsersLogginSQL = await _usersLogginService.GetAll();
+            usersLoggin usersLoggin = queryUsersLogginSQL.Where(c => c.nick == modelo.nick).FirstOrDefault();
+            if (usersLoggin != null)
+            {
+                ModelState.AddModelError("Nick", "ERROR: The nick is already exist");
+                isRepeatNick = true;
+            }
+            return isRepeatNick;
+        }
+        private async Task<bool> IsRepeatEmail(VMRegister modelo)
+        {
+            bool isRepeatEmail = false;
+            IQueryable<usersLoggin> queryUsersLogginSQL = await _usersLogginService.GetAll();
+            usersLoggin usersLoggin = queryUsersLogginSQL.Where(c => c.email == modelo.email).FirstOrDefault();
+            if (usersLoggin != null)
+            {
+                ModelState.AddModelError("Email", "ERROR: The email is already exist");
+                isRepeatEmail = true;
+            }
+            return isRepeatEmail;
+        }
 
         private bool checkDataRegister(VMRegister modelo)
         {
             bool checkData = true;
-            var nameChecker = _strategyFactory.CreateCheckStrategy("NameApellidoPattern");
+            var nameChecker = _strategyFactory.CreateCheckStrategy("NamePattern");
             if (!nameChecker.Validate(modelo.name))
             {
-                ModelState.AddModelError("Name", "ERROR: The name must have at least 5 characters.");
+                ModelState.AddModelError("Name", "ERROR: The name cannot contain numbers or special characters and the name cannot exceed 50 characters");
                 checkData = false;
             }
-            var apellidoChecker = _strategyFactory.CreateCheckStrategy("NameApellidoPattern");
-            if (!apellidoChecker.Validate(modelo.apellido))
+            var apellidoChecker = _strategyFactory.CreateCheckStrategy("SurnamePattern");
+            if (!apellidoChecker.Validate(modelo.surname))
             {
-                ModelState.AddModelError("Apellido", "ERROR: The apellido must have at least 5 characters.");
+                ModelState.AddModelError("Apellido", "ERROR: The surname cannot contain numbers or special characters and the surname cannot exceed 100 characters");
                 checkData = false;
             }
             var emailLengthChecker = _strategyFactory.CreateCheckStrategy("EmailLength");
             if (!emailLengthChecker.Validate(modelo.email))
             {
-                ModelState.AddModelError("Email", "ERROR: Emails longer than 40 characters are not accepted.");
+                ModelState.AddModelError("Email", "ERROR: Emails longer than 100 characters are not accepted.");
                 checkData = false;
             }
             var emailChecker = _strategyFactory.CreateCheckStrategy("UserEmail");
@@ -178,7 +198,7 @@ namespace ClownClubMVC.WebApp.Controllers
             var passwordLegnthChecker = _strategyFactory.CreateCheckStrategy("PasswordLength");
             if (!passwordLegnthChecker.Validate(modelo.pswdLoggin))
             {
-                ModelState.AddModelError("Pass", "ERROR: The password must be at least 8 characters.");
+                ModelState.AddModelError("Pass", "ERROR: The password must be at least 10 characters.");
                 checkData = false;
             }
             var passwordPatternChecker = _strategyFactory.CreateCheckStrategy("PasswordPattern");

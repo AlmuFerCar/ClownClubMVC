@@ -53,7 +53,7 @@
                 </div>
                 <div class="mb-2">
                     <label>Apellido</label>
-                    <input type="text" class="form-control" id="txtApellido" />
+                    <input type="text" class="form-control" id="txtSurname" />
                 </div>
                 <div class="mb-2">
                     <label>Email</label>
@@ -75,6 +75,11 @@
         </div>
     </div>
 </div>
+<div class="row mt-4">
+    <div class="col-md-6 offset-md-3 text-center">
+        <a href="@Url.Action("Management", "Management")" class="btn btn-link">Volver a Administrar</a>
+    </div>
+</div>
 <!--Fin Modal-->
 @section Scripts{
 
@@ -83,7 +88,7 @@
         const Modelo_base = {
             id: 0,
             name: "",
-            apellido: "",
+            surname: "",
             email: "",
             nick: "",
             pswdLoggin: "",
@@ -98,7 +103,7 @@
 
             $("#txtIdUsuario").val(modelo.id);
             $("#txtNombre").val(modelo.name)
-            $("#txtApellido").val(modelo.apellido)
+            $("#txtSurname").val(modelo.surname)
             $("#txtEmail").val(modelo.email)
             $("#txtNick").val(modelo.nick)
             $("#txtPassword").val(modelo.pswdLoggin)
@@ -115,7 +120,7 @@
 
             NuevoModelo["id"] = $("#txtIdUsuario").val();
             NuevoModelo["name"] = $("#txtNombre").val();
-            NuevoModelo["apellido"] = $("#txtApellido").val();
+            NuevoModelo["surname"] = $("#txtSurname").val();
             NuevoModelo["email"] = $("#txtEmail").val();
             NuevoModelo["nick"] = $("#txtNick").val();
             NuevoModelo["pswdLoggin"] = $("#txtPassword").val();
@@ -176,7 +181,7 @@
                         $("#tbUsuario tbody").append(
                             $("<tr>").append(
                                 $("<td>").text(item.name),
-                                $("<td>").text(item.apellido),
+                                $("<td>").text(item.surname),
                                 $("<td>").text(item.email),
                                 $("<td>").text(item.nick),
                                 $("<td>").append(

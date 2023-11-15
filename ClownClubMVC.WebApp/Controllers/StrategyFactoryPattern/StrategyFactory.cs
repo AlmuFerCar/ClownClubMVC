@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.WebApp.Controllers.Interfaces;
+﻿using ClownClubMVC.WebApp.Controllers.InterfacesStrategy;
 using ClownClubMVC.WebApp.Controllers.StrategyValidations;
 
 namespace ClownClubMVC.WebApp.Controllers.StrategyFactoryPattern
@@ -9,8 +9,10 @@ namespace ClownClubMVC.WebApp.Controllers.StrategyFactoryPattern
         {
             switch (strategyType)
             {
-                case "NameApellidoPattern":
-                    return new ValidateNameApellidoPattern();
+                case "NamePattern":
+                    return new ValidateNamePattern();
+                case "SurnamePattern":
+                    return new ValidateSurnamePattern();
                 case "EmailLength":
                     return new ValidateEmailLength();
                 case "PasswordLength":

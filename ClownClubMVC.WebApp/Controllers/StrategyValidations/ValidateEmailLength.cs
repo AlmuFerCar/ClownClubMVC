@@ -1,4 +1,4 @@
-﻿using ClownClubMVC.WebApp.Controllers.Interfaces;
+﻿using ClownClubMVC.WebApp.Controllers.InterfacesStrategy;
 
 namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
 {
@@ -6,9 +6,8 @@ namespace ClownClubMVC.WebApp.Controllers.StrategyValidations
     {
         public bool Validate(params string[] inputs)
         {
-            if (inputs[0].Length > 40)
+            if (inputs[0].Length > 100)
             {
-                Console.WriteLine("ERROR: Emails longer than 40 characters are not accepted.");
                 return false;
             }
             return true;
