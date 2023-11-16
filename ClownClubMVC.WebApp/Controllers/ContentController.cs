@@ -1,18 +1,28 @@
-﻿using ClownClubMVC.Business.Services.Interfaces;
-using ClownClubMVC.WebApp.Models.ViewModels;
+﻿using ClownClubMVC.WebApp.Models.ViewModels;
 using ClownClubMVC.WebApp.Models;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using ClownClubMVC.Models.content;
+using ClownClubMVC.Business.Services;
+using ClownClubMVC.Business.Services.Interfaces.Content;
+using ClownClubMVC.Business.Services.Content;
 
 namespace ClownClubMVC.WebApp.Controllers
 {
     public class ContentController : Controller
     {
         private readonly IContentService _contentService;
-        public ContentController(IContentService contentServ)
+        private readonly IFilmService _filmService;
+        private readonly ISerieService _serieService;
+        private readonly IPodcastService _podcastService;
+        private readonly ITvProgramService _tvProgramService;
+        public ContentController(IContentService contentServ, IFilmService filmService, ISerieService serieService, IPodcastService podcastService, ITvProgramService tvProgramService)
         {
             _contentService = contentServ;
+            _filmService = filmService; 
+            _serieService = serieService;
+            _podcastService = podcastService;
+            _tvProgramService = tvProgramService;
         }
         public IActionResult ContentManage()
         {
@@ -25,6 +35,40 @@ namespace ClownClubMVC.WebApp.Controllers
         public ActionResult Details(int id)
         {
             return View();
+        }
+        public async Task<ActionResult> GetContentDetails(int id)
+        {
+            var response = new Dictionary<string, object>{ };
+            var content = await _contentService.GetOne(id);
+            if (content == null)
+            {
+                return NotFound();
+            }
+            else 
+            {
+                response.Add("Content", content);
+            }
+            var film = await _filmService.GetOneByContentId(id);
+            if (film != null)
+            {
+                response.Add("FilmInfo", film);
+            }
+            var serie = await _serieService.GetOneByContentId(id);
+            if (serie != null)
+            {
+                response.Add("SerieInfo", serie);
+            }
+            var podcast = await _podcastService.GetOneByContentId(id);
+            if (podcast != null)
+            {
+                response.Add("PodcastInfo", podcast);
+            }
+            var tvProgram = await _tvProgramService.GetOneByContentId(id);
+            if (tvProgram != null)
+            {
+                response.Add("TvProgramInfo", tvProgram);
+            }
+            return StatusCode(StatusCodes.Status200OK, response);
         }
         public async Task<ActionResult> ListView()
         {

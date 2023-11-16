@@ -1,4 +1,5 @@
-﻿using ClownClubMVC.Business.Services.Interfaces;
+﻿using ClownClubMVC.Business.Services.Interfaces.Login;
+using ClownClubMVC.Business.Services.Interfaces.Person;
 using ClownClubMVC.Models.loggin;
 using ClownClubMVC.Models.person;
 using ClownClubMVC.WebApp.Controllers.StrategyFactoryPattern;

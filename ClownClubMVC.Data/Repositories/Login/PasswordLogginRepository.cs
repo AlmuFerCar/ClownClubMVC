@@ -1,6 +1,6 @@
 ﻿using ClownClubMVC.Models.loggin;
 
-namespace ClownClubMVC.Data.Repositories
+namespace ClownClubMVC.Data.Repositories.Login
 {
     public class PasswordLogginRepository : IGenericRepository<passwordLoggin>
     {

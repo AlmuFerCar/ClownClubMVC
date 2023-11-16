@@ -37,41 +37,101 @@
             <div class="modal-body">
                 <div class="container">
                     <div class="row">
-                        <div class="col-md-6">
+                        <div class="col-md-6" style="padding-right: 15px;">
                             <!-- Columna izquierda para la imagen -->
                             <div class="mb-2">
-                                <img src="" alt="Imagen" style="max-width: 100%;" id="imgPreview" />
+                                <img src="" alt="Imagen" style="width: 300px; height: 500px;" id="imgPreview" />
                             </div>
                         </div>
-                        <div class="col-md-6">
+                        <div class="col-md-6" >
                             <!-- Columna derecha para el resto de la información -->
-                            <div class="mb-2">
-                                <label>Titulo</label>
-                                <p id="txtTitulo" class="form-control-static"></p>
+                             <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Titulo: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtTitulo" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Duración</label>
-                                <p id="txtDuracion" class="form-control-static"></p>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Duración: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtDuracion" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Tamaño</label>
-                                <p id="txtTamanio" class="form-control-static"></p>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Tamaño: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtTamanio" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Visitas</label>
-                                <p id="txtVisitas" class="form-control-static"></p>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Visitas: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtVisitas" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Idioma</label>
-                                <p id="txtIdioma" class="form-control-static"></p>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Idioma: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtIdioma" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Formato</label>
-                                <p id="txtFormato" class="form-control-static"></p>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Formato: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtFormato" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
-                            <div class="mb-2">
-                                <label>Productor</label>
-                                <p id="txtProductor" class="form-control-static"></p>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Productor: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtProductor" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Actores: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtActores" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Actrices: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtActrices" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Presentadores: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtPresentadores" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-3">
+                                    <label style="font-weight: bold;" style="margin-right: 30px;">Colaboradores: </label>
+                                </div>
+                                <div class="col-md-9">
+                                    <p id="txtColaboradores" class="form-control-static" style="margin-left: 30px;"></p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -96,27 +156,65 @@
             formatContent: "",
             producer: "",
             imageUrl: "",
+            actor: "",
+            actress: "",
+            presenter: "",
+            collaborator: "",
         }
 
         $(document).ready(() => {
 
             listaContenidos();
         })
-
         function mostrarModal(modelo) {
+            console.log("Modelo recibido:", modelo);
+                console.log("Datos de contenido:", modelo.Content);
+                $("#txtIdContenido").text(modelo.Content.id);
+                $("#txtTitulo").text(modelo.Content.title)
+                $("#txtDuracion").text(modelo.Content.duration)
+                $("#txtTamanio").text(modelo.Content.size)
+                $("#txtVisitas").text(modelo.Content.viewsContent)
+                $("#txtIdioma").text(modelo.Content.languageContent)
+                $("#txtFormato").text(modelo.Content.formatContent)
+                $("#txtProductor").text(modelo.Content.producer)
+                $("#imgPreview").attr("src", modelo.Content.imageUrl);
 
-            $("#txtIdContenido").text(modelo.id);
-            $("#txtTitulo").text(modelo.title)
-            $("#txtDuracion").text(modelo.duration)
-            $("#txtTamanio").text(modelo.size)
-            $("#txtVisitas").text(modelo.viewsContent)
-            $("#txtIdioma").text(modelo.languageContent)
-            $("#txtFormato").text(modelo.formatContent)
-            $("#txtProductor").text(modelo.producer)
-            $("#imgPreview").attr("src", modelo.imageUrl);;
+            if (modelo.FilmInfo) {
+                $("#txtActores").closest('.row').show();
+                $("#txtActrices").closest('.row').show();
+                $("#txtActores").text(modelo.FilmInfo.actor);
+                $("#txtActrices").text(modelo.FilmInfo.actress);
+                $("#txtPresentadores").closest('.row').hide();
+                $("#txtColaboradores").closest('.row').hide();
+            }
+             else if (modelo.SerieInfo) {
+                $("#txtActores").closest('.row').show();
+                $("#txtActrices").closest('.row').show();
+                $("#txtActores").text(modelo.SerieInfo.actor);
+                $("#txtActrices").text(modelo.SerieInfo.actress);
+                $("#txtPresentadores").closest('.row').hide();
+                $("#txtColaboradores").closest('.row').hide();
+            }
+            else if (modelo.PodcastInfo) {
+                $("#txtPresentadores").closest('.row').show();
+                $("#txtColaboradores").closest('.row').show();
+                $("#txtPresentadores").text(modelo.PodcastInfo.presenter);
+                $("#txtColaboradores").text(modelo.PodcastInfo.collaborator);
+                $("#txtActores").closest('.row').hide();
+                $("#txtActrices").closest('.row').hide();
+            }
+           else if (modelo.TvProgramInfo) {
+                $("#txtPresentadores").closest('.row').show();
+                $("#txtColaboradores").closest('.row').show();
+                $("#txtPresentadores").text(modelo.TvProgramInfo.presenter);
+                $("#txtColaboradores").text(modelo.TvProgramInfo.collaborator);
+                $("#txtActores").closest('.row').hide();
+                $("#txtActrices").closest('.row').hide();
+            }
             $('.modal').modal('show');
         }
-
+            
+        
         function listaContenidos() {
         fetch("ListView")
             .then((response) => {
@@ -145,9 +243,20 @@
                 })
             })
         }
-        $("#tbContenido tbody").on("click", ".btn-details", function () {
-            let contenido = $(this).data("modelo")
-            mostrarModal(contenido)
-        })
+         $("#tbContenido tbody").on("click", ".btn-details", function () {
+        let contenido = $(this).data("modelo"); // Obtener el modelo de contenido del botón
+
+        // Hacer una solicitud al controlador para obtener los detalles del contenido por su ID
+        fetch("GetContentDetails?id=" + contenido.id)
+            .then((response) => {
+                return response.ok ? response.json() : Promise.reject(response)
+            })
+            .then((dataJson) => {
+                mostrarModal(dataJson);
+            })
+            .catch((error) => {
+                console.error("Error al obtener detalles del contenido:", error);
+            });
+    })
     </script>
 }

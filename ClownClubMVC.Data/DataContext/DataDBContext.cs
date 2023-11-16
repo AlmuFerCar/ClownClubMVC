@@ -15,5 +15,9 @@ namespace ClownClubMVC.Data
 		public DbSet<passwordLoggin> passwordLoggin { get; set; }
 		public DbSet<person> person { get; set; }
 		public DbSet<content> content { get; set; }
-	}
+        public DbSet<film> film { get; set; }
+        public DbSet<serie> serie { get; set; }
+        public DbSet<tvProgram> tvProgram { get; set; }
+        public DbSet<podcast> podcast { get; set; }
+    }
 }

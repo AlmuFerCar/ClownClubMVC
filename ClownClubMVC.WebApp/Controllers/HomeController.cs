@@ -1,5 +1,5 @@
 ﻿using System.Diagnostics;
-using ClownClubMVC.Business.Services.Interfaces;
+using ClownClubMVC.Business.Services.Interfaces.Login;
 using ClownClubMVC.Models.loggin;
 using ClownClubMVC.WebApp.Models;
 using ClownClubMVC.WebApp.Models.ViewModels;

@@ -1,6 +1,6 @@
 ﻿using ClownClubMVC.Models.loggin;
 
-namespace ClownClubMVC.Business.Services.Interfaces
+namespace ClownClubMVC.Business.Services.Interfaces.Login
 {
     public interface IUsersLogginService
     {

@@ -1,10 +1,10 @@
-﻿using ClownClubMVC.Business.Services.Interfaces;
+﻿using ClownClubMVC.Business.Services.Interfaces.Content;
 using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Models.content;
 
-namespace ClownClubMVC.Business.Services
+namespace ClownClubMVC.Business.Services.Content
 {
-    public class ContentService: IContentService
+    public class ContentService : IContentService
     {
         private readonly IGenericRepository<content> _contentRepo;
         public ContentService(IGenericRepository<content> contentRepo)

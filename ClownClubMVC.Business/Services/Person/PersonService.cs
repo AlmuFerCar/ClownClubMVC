@@ -1,8 +1,8 @@
-﻿using ClownClubMVC.Business.Services.Interfaces;
+﻿using ClownClubMVC.Business.Services.Interfaces.Person;
 using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Models.person;
 
-namespace ClownClubMVC.Business.Services
+namespace ClownClubMVC.Business.Services.Person
 {
     public class PersonService : IPersonService
     {

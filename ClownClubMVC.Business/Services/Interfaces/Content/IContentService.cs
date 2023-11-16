@@ -1,7 +1,7 @@
 ﻿using ClownClubMVC.Models.content;
 
 
-namespace ClownClubMVC.Business.Services.Interfaces
+namespace ClownClubMVC.Business.Services.Interfaces.Content
 {
     public interface IContentService
     {

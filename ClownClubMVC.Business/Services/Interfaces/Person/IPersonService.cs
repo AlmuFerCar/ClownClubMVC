@@ -1,6 +1,6 @@
 ﻿using ClownClubMVC.Models.person;
 
-namespace ClownClubMVC.Business.Services.Interfaces
+namespace ClownClubMVC.Business.Services.Interfaces.Person
 {
     public interface IPersonService
     {

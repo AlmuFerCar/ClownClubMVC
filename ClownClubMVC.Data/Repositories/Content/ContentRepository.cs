@@ -1,5 +1,5 @@
 ﻿using ClownClubMVC.Models.content;
-namespace ClownClubMVC.Data.Repositories
+namespace ClownClubMVC.Data.Repositories.Content
 {
     public class ContentRepository : IGenericRepository<content>
     {

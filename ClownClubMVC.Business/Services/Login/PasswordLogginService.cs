@@ -1,8 +1,8 @@
-﻿using ClownClubMVC.Business.Services.Interfaces;
+﻿using ClownClubMVC.Business.Services.Interfaces.Login;
 using ClownClubMVC.Data.Repositories;
 using ClownClubMVC.Models.loggin;
 
-namespace ClownClubMVC.Business.Services
+namespace ClownClubMVC.Business.Services.Login
 {
     public class PasswordLogginService : IPasswordLogginService
     {

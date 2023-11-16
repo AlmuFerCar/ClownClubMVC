@@ -1,6 +1,6 @@
 ﻿using ClownClubMVC.Models.person;
 
-namespace ClownClubMVC.Data.Repositories
+namespace ClownClubMVC.Data.Repositories.Person
 {
     public class PersonRepository : IGenericRepository<person>
     {
