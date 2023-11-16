@@ -81,7 +81,28 @@
                 </div>
                 <div class="mb-2">
                     <label>Imagen</label>
-                    <img src="" alt="Imagen" style="max-width: 200px;" id="imgPreview" />
+                    <input type="text" class="form-control" id="#txtUrlImg" />
+                </div>
+                <div class="mb-2">
+                    <label>Tipo de Contenido</label>
+                    <select class="form-select" id="selTipoContenido">
+                        <option value="Pelicula">Película</option>
+                        <option value="Serie">Serie</option>
+                        <option value="Podcast">Podcast</option>
+                    </select>
+                </div>
+                <div class="mb-2" id="peliculaFields" style="display: none;">
+                    <label>Actor</label>
+                    <input type="text" class="form-control" id="txtActor" />
+                    <label>Actriz</label>
+                    <input type="text" class="form-control" id="txtActriz" />
+                </div>
+
+                <div class="mb-2" id="podcastFields" style="display: none;">
+                    <label>Presentador</label>
+                    <input type="text" class="form-control" id="txtPresentador" />
+                    <label>Colaborador</label>
+                    <input type="text" class="form-control" id="txtColaborador" />
                 </div>
             </div>
             <div class="modal-footer">
@@ -117,6 +138,22 @@
 
             listaContenidos();
         })
+        $(document).ready(() => {
+            $("#selTipoContenido").change(function () {
+                var seleccion = $(this).val();
+
+                if (seleccion === "Pelicula") {
+                    $("#peliculaFields").show();
+                    $("#podcastFields").hide();
+                } else if (seleccion === "Podcast") {
+                    $("#podcastFields").show();
+                    $("#peliculaFields").hide();
+                } else {
+                    $("#peliculaFields").hide();
+                    $("#podcastFields").hide();
+                }
+            });
+        });
 
         function mostrarModal(modelo) {
 
@@ -128,7 +165,7 @@
             $("#txtIdioma").val(modelo.languageContent)
             $("#txtFormato").val(modelo.formatContent)
             $("#txtProductor").val(modelo.producer)
-            $("#imgPreview").val(modelo.imageUrl);
+            $("#txtUrlImg").val(modelo.imageUrl);
             $('.modal').modal('show');
         }
 
@@ -148,7 +185,7 @@
             NuevoModelo["languageContent"] = $("#txtIdioma").val();
             NuevoModelo["formatContent"] = $("#txtFormato").val();
             NuevoModelo["producer"] = $("#txtProductor").val();
-            NuevoModelo["imageUrl"] = $("#imgPreview").val();
+            NuevoModelo["imageUrl"] = $("#txtUrlImg").val();
 
             if ($("#txtIdContenido").val() == "0") {
                 fetch("Insert", {

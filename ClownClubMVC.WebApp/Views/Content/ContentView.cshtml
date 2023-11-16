@@ -142,7 +142,8 @@
 </div>
 
 <!--Fin Modal-->
-@section Scripts{
+@section Scripts
+{
 
     <script>
 
@@ -162,11 +163,13 @@
             collaborator: "",
         }
 
-        $(document).ready(() => {
+        $(document).ready(() => 
+        {
 
             listaContenidos();
         })
-        function mostrarModal(modelo) {
+        function mostrarModal(modelo) 
+        {
             console.log("Modelo recibido:", modelo);
                 console.log("Datos de contenido:", modelo.Content);
                 $("#txtIdContenido").text(modelo.Content.id);
@@ -179,43 +182,45 @@
                 $("#txtProductor").text(modelo.Content.producer)
                 $("#imgPreview").attr("src", modelo.Content.imageUrl);
 
-            if (modelo.FilmInfo) {
+            if (modelo.FilmInfo || modelo.SerieInfo) 
+            {
                 $("#txtActores").closest('.row').show();
                 $("#txtActrices").closest('.row').show();
-                $("#txtActores").text(modelo.FilmInfo.actor);
-                $("#txtActrices").text(modelo.FilmInfo.actress);
                 $("#txtPresentadores").closest('.row').hide();
                 $("#txtColaboradores").closest('.row').hide();
-            }
-             else if (modelo.SerieInfo) {
-                $("#txtActores").closest('.row').show();
-                $("#txtActrices").closest('.row').show();
-                $("#txtActores").text(modelo.SerieInfo.actor);
-                $("#txtActrices").text(modelo.SerieInfo.actress);
-                $("#txtPresentadores").closest('.row').hide();
-                $("#txtColaboradores").closest('.row').hide();
-            }
-            else if (modelo.PodcastInfo) {
+                if(modelo.FilmInfo)
+                {
+                    $("#txtActores").text(modelo.FilmInfo.actor);
+                    $("#txtActrices").text(modelo.FilmInfo.actress);
+                }
+                if(modelo.SerieInfo)
+                {
+                    $("#txtActores").text(modelo.SerieInfo.actor);
+                    $("#txtActrices").text(modelo.SerieInfo.actress);
+                }
+            } else if (modelo.PodcastInfo || modelo.TvProgramInfo) 
+            {
                 $("#txtPresentadores").closest('.row').show();
                 $("#txtColaboradores").closest('.row').show();
-                $("#txtPresentadores").text(modelo.PodcastInfo.presenter);
-                $("#txtColaboradores").text(modelo.PodcastInfo.collaborator);
                 $("#txtActores").closest('.row').hide();
                 $("#txtActrices").closest('.row').hide();
-            }
-           else if (modelo.TvProgramInfo) {
-                $("#txtPresentadores").closest('.row').show();
-                $("#txtColaboradores").closest('.row').show();
-                $("#txtPresentadores").text(modelo.TvProgramInfo.presenter);
-                $("#txtColaboradores").text(modelo.TvProgramInfo.collaborator);
-                $("#txtActores").closest('.row').hide();
-                $("#txtActrices").closest('.row').hide();
+                if(modelo.PodcastInfo)
+                {
+                    $("#txtPresentadores").text(modelo.PodcastInfo.presenter);
+                    $("#txtColaboradores").text(modelo.PodcastInfo.collaborator);
+                }
+                if (modelo.TvProgramInfo) 
+                {
+                    $("#txtPresentadores").text(modelo.TvProgramInfo.presenter);
+                    $("#txtColaboradores").text(modelo.TvProgramInfo.collaborator);
+                }
             }
             $('.modal').modal('show');
         }
             
         
-        function listaContenidos() {
+        function listaContenidos() 
+        {
         fetch("ListView")
             .then((response) => {
                 return response.ok ? response.json() : Promise.reject(response)
@@ -243,20 +248,19 @@
                 })
             })
         }
-         $("#tbContenido tbody").on("click", ".btn-details", function () {
-        let contenido = $(this).data("modelo"); // Obtener el modelo de contenido del botón
-
-        // Hacer una solicitud al controlador para obtener los detalles del contenido por su ID
-        fetch("GetContentDetails?id=" + contenido.id)
-            .then((response) => {
-                return response.ok ? response.json() : Promise.reject(response)
-            })
-            .then((dataJson) => {
-                mostrarModal(dataJson);
-            })
-            .catch((error) => {
-                console.error("Error al obtener detalles del contenido:", error);
-            });
-    })
+         $("#tbContenido tbody").on("click", ".btn-details", function () 
+         {
+            let contenido = $(this).data("modelo"); 
+            fetch("GetContentDetails?id=" + contenido.id)
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+                    mostrarModal(dataJson);
+                })
+                .catch((error) => {
+                    console.error("Error al obtener detalles del contenido:", error);
+                });
+        })
     </script>
 }

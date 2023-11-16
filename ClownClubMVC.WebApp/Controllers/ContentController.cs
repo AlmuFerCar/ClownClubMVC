@@ -103,7 +103,7 @@ namespace ClownClubMVC.WebApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Insert([FromBody] VMContent modelo)
+        public async Task<ActionResult> Insert([FromBody] VMContent modelo, string tipoContenido)
         {
             try
             {
@@ -119,6 +119,18 @@ namespace ClownClubMVC.WebApp.Controllers
                     producer = modelo.producer,
                     imageUrl = modelo.imageUrl
                 };
+                if (tipoContenido == "Pelicula")
+                {
+                    // Código para guardar en la tabla de películas (Film)
+                }
+                else if (tipoContenido == "Serie")
+                {
+                    // Código para guardar en la tabla de series (Serie)
+                }
+                else if (tipoContenido == "Podcast")
+                {
+                    // Código para guardar en la tabla de podcasts (Podcast)
+                }
                 bool answercontent = await _contentService.Insert(newModel);
                 return StatusCode(StatusCodes.Status200OK, new { valor = answercontent });
             }
