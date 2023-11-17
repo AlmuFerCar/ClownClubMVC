@@ -1,8 +1,6 @@
 ﻿﻿﻿@{
     ViewData["Title"] = "Lista Contenido";
 }
-
-
 <div class="row">
     <div class="col-sm-12">
 
@@ -19,6 +17,7 @@
                     <thead>
                         <tr>
                             <th>Titulo</th>
+                            <th>Tipo</th>
                             <th>Duración</th>
                             <th>Tamaño</th>
                             <th>Visitas</th>
@@ -39,8 +38,6 @@
     </div>
 </div>
 
-
-
 <!--Inicio Modal-->
 <div class="modal" tabindex="-1">
     <div class="modal-dialog">
@@ -54,6 +51,10 @@
                 <div class="mb-2">
                     <label>Titulo</label>
                     <input type="text" class="form-control" id="txtTitulo" />
+                </div>
+                <div class="mb-2">
+                    <label>Tipo</label>
+                    <input type="text" class="form-control" id="txtTipo" readonly />
                 </div>
                 <div class="mb-2">
                     <label>Duración</label>
@@ -81,24 +82,26 @@
                 </div>
                 <div class="mb-2">
                     <label>Imagen</label>
-                    <input type="text" class="form-control" id="#txtUrlImg" />
+                    <input type="text" class="form-control" id="txtUrlImg" />
                 </div>
                 <div class="mb-2">
                     <label>Tipo de Contenido</label>
                     <select class="form-select" id="selTipoContenido">
-                        <option value="Pelicula">Película</option>
-                        <option value="Serie">Serie</option>
-                        <option value="Podcast">Podcast</option>
+                        <option value="" selected>Seleccionar</option>
+                        <option value="pelicula">película</option>
+                        <option value="serie">serie</option>
+                        <option value="podcast">podcast</option>
+                        <option value="tvProgram">tvProgram</option>
                     </select>
                 </div>
-                <div class="mb-2" id="peliculaFields" style="display: none;">
+                <div class="mb-2" id="peliculaSerieFields" style="display: none;">
                     <label>Actor</label>
                     <input type="text" class="form-control" id="txtActor" />
                     <label>Actriz</label>
                     <input type="text" class="form-control" id="txtActriz" />
                 </div>
 
-                <div class="mb-2" id="podcastFields" style="display: none;">
+                <div class="mb-2" id="podcastTvProgramFields" style="display: none;">
                     <label>Presentador</label>
                     <input type="text" class="form-control" id="txtPresentador" />
                     <label>Colaborador</label>
@@ -124,6 +127,7 @@
 
         const Modelo_base = {
             id: 0,
+            type: "",
             title: "",
             duration: "",
             size: "",
@@ -132,6 +136,10 @@
             formatContent: "",
             producer: "",
             imageUrl: "",
+            actor: "",
+            actress: "",
+            presenter: "",
+            collaborator: "",
         }
 
         $(document).ready(() => {
@@ -142,42 +150,90 @@
             $("#selTipoContenido").change(function () {
                 var seleccion = $(this).val();
 
-                if (seleccion === "Pelicula") {
-                    $("#peliculaFields").show();
-                    $("#podcastFields").hide();
-                } else if (seleccion === "Podcast") {
-                    $("#podcastFields").show();
-                    $("#peliculaFields").hide();
+                if (seleccion === "pelicula" || seleccion === "serie") {
+                    $("#peliculaSerieFields").show();
+                    $("#podcastTvProgramFields").hide();
+                } else if (seleccion === "podcast" || seleccion === "tvProgram") {
+                    $("#podcastTvProgramFields").show();
+                    $("#peliculaSerieFields").hide();
                 } else {
-                    $("#peliculaFields").hide();
-                    $("#podcastFields").hide();
+                    $("#peliculaSerieFieldss").hide();
+                    $("#podcastTvProgramFields").hide();
                 }
+                $("#txtTipo").val(seleccion).prop('readonly', true);
             });
         });
 
         function mostrarModal(modelo) {
-
-            $("#txtIdContenido").val(modelo.id);
-            $("#txtTitulo").val(modelo.title)
-            $("#txtDuracion").val(modelo.duration)
-            $("#txtTamanio").val(modelo.size)
-            $("#txtVisitas").val(modelo.viewsContent)
-            $("#txtIdioma").val(modelo.languageContent)
-            $("#txtFormato").val(modelo.formatContent)
-            $("#txtProductor").val(modelo.producer)
-            $("#txtUrlImg").val(modelo.imageUrl);
+            $("#txtIdContenido").val(modelo.Content.id);
+            $("#txtTipo").val(modelo.Content.type);
+            $("#txtTitulo").val(modelo.Content.title)
+            $("#txtDuracion").val(modelo.Content.duration)
+            $("#txtTamanio").val(modelo.Content.size)
+            $("#txtVisitas").val(modelo.Content.viewsContent)
+            $("#txtIdioma").val(modelo.Content.languageContent)
+            $("#txtFormato").val(modelo.Content.formatContent)
+            $("#txtProductor").val(modelo.Content.producer)
+            $("#txtUrlImg").val(modelo.Content.imageUrl);
+            
+            if (modelo.FilmInfo ) {
+                $("#peliculaSerieFields").show();
+                $("#podcastTvProgramFields").hide();
+                $("#txtActor").val(modelo.FilmInfo.actor);
+                $("#txtActriz").val(modelo.FilmInfo.actress);
+            }
+            else if (modelo.SerieInfo) {
+                $("#peliculaSerieFields").show();
+                $("#podcastTvProgramFields").hide();
+                $("#txtActor").val(modelo.SerieInfo.actor);
+                $("#txtActriz").val(modelo.SerieInfo.actress);
+            }
+            else if (modelo.PodcastInfo) {
+                $("#podcastTvProgramFields").show();
+                $("#peliculaSerieFields").hide();
+                $("#txtPresentador").val(modelo.PodcastInfo.presenter);
+                $("#txtColaborador").val(modelo.PodcastInfo.collaborator);
+            }
+            else if (modelo.TvProgramInfo) {
+                $("#podcastTvProgramFields").show();
+                $("#peliculaSerieFields").hide();
+                $("#txtPresentador").val(modelo.TvProgramInfo.presenter);
+                $("#txtColaborador").val(modelo.TvProgramInfo.collaborator);
+            }
+            $('.modal').modal('show');
+        }
+        function mostrarModalNew() {
+            $("#txtIdContenido").val(0)
+            $("#txtTipo").val('')
+            $("#txtTitulo").val('')
+            $("#txtDuracion").val('')
+            $("#txtTamanio").val('')
+            $("#txtVisitas").val('')
+            $("#txtIdioma").val('')
+            $("#txtFormato").val('')
+            $("#txtProductor").val('')
+            $("#txtUrlImg").val('')
+            $("#txtActor").val('')
+            $("#txtActriz").val('')
+            $("#txtPresentador").val('')
+            $("#txtColaborador").val('')
+            $("#selTipoContenido").val('');
+            $("#peliculaSerieFields").hide();  // Oculta los campos de película/serie
+            $("#podcastTvProgramFields").hide();
             $('.modal').modal('show');
         }
 
         $("#btnNuevo").click(() => {
-
-            mostrarModal(Modelo_base);
+            $("#selTipoContenido").prop("disabled", false);
+            mostrarModalNew();
         })
 
         $("#btnGuardar").click(() => {
+            console.log("Entrando en la función de guardar");
             let NuevoModelo = Modelo_base;
-
+            console.log("Valor de NuevoModelo", NuevoModelo);
             NuevoModelo["id"] = $("#txtIdContenido").val();
+            NuevoModelo["type"] = $("#selTipoContenido").val();
             NuevoModelo["title"] = $("#txtTitulo").val();
             NuevoModelo["duration"] = $("#txtDuracion").val();
             NuevoModelo["size"] = $("#txtTamanio").val();
@@ -186,9 +242,18 @@
             NuevoModelo["formatContent"] = $("#txtFormato").val();
             NuevoModelo["producer"] = $("#txtProductor").val();
             NuevoModelo["imageUrl"] = $("#txtUrlImg").val();
-
+            if ($("#selTipoContenido").val() === "pelicula" || $("#selTipoContenido").val() === "serie") {
+                console.log("Guardando datos de película o serie");
+                NuevoModelo["actor"] = $("#txtActor").val();
+                NuevoModelo["actress"] = $("#txtActriz").val();
+            } else if ($("#selTipoContenido").val() === "podcast" || $("#selTipoContenido").val() === "tvProgram") {
+                console.log("Guardando datos de podcast o programa de TV");
+                NuevoModelo["presenter"] = $("#txtPresentador").val();
+                NuevoModelo["collaborator"] = $("#txtColaborador").val();
+            }
+            console.log("Antes del fetch de Insert o Update");
             if ($("#txtIdContenido").val() == "0") {
-                fetch("Insert", {
+                fetch(`Insert?tipoContenido=${$("#selTipoContenido").val()}`, {
                     method: "POST",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -203,11 +268,11 @@
                         if (dataJson.valor) {
                             alert("creado");
                             $('.modal').modal('hide');
-                            listaUsuarios();
+                            listaContenidos();
                         }
                     })
             } else {
-                fetch("Update", {
+                fetch(`Update?tipoContenido=${$("#selTipoContenido").val()}`, {
                     method: "PUT",
                     headers: {
                         'Content-Type': 'application/json;charset=utf-8'
@@ -222,7 +287,7 @@
                         if (dataJson.valor) {
                             alert("editado");
                             $('.modal').modal('hide');
-                            listaUsuarios();
+                            listaContenidos();
                         }
                     })
             }
@@ -243,6 +308,7 @@
                         $("#tbContenido tbody").append(
                             $("<tr>").append(
                                 $("<td>").text(item.title),
+                                $("<td>").text(item.type),
                                 $("<td>").text(item.duration),
                                 $("<td>").text(item.size),
                                 $("<td>").text(item.viewsContent),
@@ -253,8 +319,8 @@
                                     $("<img>").addClass("imagen-contenido").attr({ src: item.imageUrl, alt: "Imagen" }),
                                 ),
                                 $("<td>").append(
-                                    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data("modelo", item).text("Editar"),
-                                    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data("id", item.id).text("Eliminar")
+                                    $("<button>").addClass("btn btn-primary btn-sm me-2 btn-editar").data({ "modelo": item}).text("Editar"),
+                                    $("<button>").addClass("btn btn-danger btn-sm btn-eliminar").data({ "id": item.id, "type": item.type}).text("Eliminar")
                                 )
                             )
                         )
@@ -264,14 +330,29 @@
 
         $("#tbContenido tbody").on("click", ".btn-editar", function () {
             let contenido = $(this).data("modelo")
-            mostrarModal(contenido)
+            fetch("GetContentDetails?id=" + contenido.id)
+                .then((response) => {
+                    return response.ok ? response.json() : Promise.reject(response)
+                })
+                .then((dataJson) => {
+                    mostrarModal(dataJson);
+                    let tipoContenido = contenido.type;
+                    if (tipoContenido) {
+                        document.getElementById("selTipoContenido").value = tipoContenido;
+                        $("#selTipoContenido").prop("disabled", true);
+                    }
+                })
+                .catch((error) => {
+                    console.error("Error al obtener detalles del contenido:", error);
+                });
         })
 
         $("#tbContenido tbody").on("click", ".btn-eliminar", function () {
             let idcontenido= $(this).data("id")
+            let tipoContenido = $(this).data("type");
             let resultado = window.confirm("¿Desea eliminar el contenido?");
             if (resultado) {
-                fetch("Delete?id=" + idcontenido, {
+                fetch(`Delete?id=${idcontenido}&tipoContenido=${tipoContenido}`, {
                     method: "DELETE"
                 })
                     .then((response) => {

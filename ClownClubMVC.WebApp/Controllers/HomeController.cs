@@ -17,12 +17,11 @@ namespace ClownClubMVC.WebApp.Controllers
             _usersLogginService = userLogServ;
             _passwordLogginService = passLogServ;
         }
-
-        // GET: /Movies/
         public ActionResult Index()
         {
             return View();
         }
+
         [HttpGet]
         public async Task<ActionResult> List()
         {
@@ -95,18 +94,6 @@ namespace ClownClubMVC.WebApp.Controllers
         }
 
         public IActionResult Privacy()
-        {
-            return View();
-        }
-        public IActionResult Contacto()
-        {
-            return View();
-        }
-        public IActionResult Aficiones()
-        {
-            return View();
-        }
-        public IActionResult Presentacion()
         {
             return View();
         }

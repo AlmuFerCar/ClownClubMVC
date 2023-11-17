@@ -23,7 +23,7 @@ namespace ClownClubMVC.Data.Repositories.Content
         }
         public async Task<bool> Delete(int id)
         {
-            film modelo = _dbContext.film.First(c => c.id == id);
+            film modelo = _dbContext.film.First(c => c.content_id == id);
             _dbContext.film.Remove(modelo);
             await _dbContext.SaveChangesAsync();
             return true;

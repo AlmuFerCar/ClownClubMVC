@@ -10,5 +10,6 @@ namespace ClownClubMVC.Business.Services.Interfaces.Content
         Task<bool> Delete(int id);
         Task<content> GetOne(int id);
         Task<IQueryable<content>> GetAll();
+        Task<content> GetOneByTitle(string title);
     }
 }

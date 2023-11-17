@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "RSVwhvX2/MEWb4GVhTt+NDAwJPUXeN9+L0/0RKMYUVU=",
+  "Hash": "9bE8DKxPZdv5Zs5uKcl6sYFbD1osZozJZwy55M3ERmI=",
   "Source": "ClownClubMVC.WebApp",
   "BasePath": "_content/ClownClubMVC.WebApp",
   "Mode": "Default",
@@ -151,6 +151,23 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\img\\correo.jpg"
+    },
+    {
+      "Identity": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\jester-hat.png",
+      "SourceId": "ClownClubMVC.WebApp",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\",
+      "BasePath": "_content/ClownClubMVC.WebApp",
+      "RelativePath": "img/jester-hat.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\img\\jester-hat.png"
     },
     {
       "Identity": "C:\\Users\\almfernandez\\source\\repos\\ClownClubMVC\\ClownClubMVC.WebApp\\wwwroot\\img\\malabares.jpg",

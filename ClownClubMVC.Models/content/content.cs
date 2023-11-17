@@ -3,7 +3,8 @@
 	public class content
 	{
 		public int id { get; set; }
-		public string title{ get; set; }
+        public string type { get; set; }
+        public string title{ get; set; }
 		public int duration { get; set; }
 		public decimal size { get; set; }
 		public int viewsContent { get; set; }

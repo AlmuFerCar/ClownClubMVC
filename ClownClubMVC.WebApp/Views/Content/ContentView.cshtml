@@ -1,7 +1,6 @@
 ﻿﻿﻿@{
     ViewData["Title"] = "Lista Contenido";
 }
-
 <div class="row">
     <div class="col-sm-12">
         <div class="card">
@@ -144,7 +143,6 @@
 <!--Fin Modal-->
 @section Scripts
 {
-
     <script>
 
         const Modelo_base = {
@@ -165,22 +163,19 @@
 
         $(document).ready(() => 
         {
-
             listaContenidos();
         })
         function mostrarModal(modelo) 
         {
-            console.log("Modelo recibido:", modelo);
-                console.log("Datos de contenido:", modelo.Content);
-                $("#txtIdContenido").text(modelo.Content.id);
-                $("#txtTitulo").text(modelo.Content.title)
-                $("#txtDuracion").text(modelo.Content.duration)
-                $("#txtTamanio").text(modelo.Content.size)
-                $("#txtVisitas").text(modelo.Content.viewsContent)
-                $("#txtIdioma").text(modelo.Content.languageContent)
-                $("#txtFormato").text(modelo.Content.formatContent)
-                $("#txtProductor").text(modelo.Content.producer)
-                $("#imgPreview").attr("src", modelo.Content.imageUrl);
+            $("#txtIdContenido").text(modelo.Content.id);
+            $("#txtTitulo").text(modelo.Content.title)
+            $("#txtDuracion").text(modelo.Content.duration)
+            $("#txtTamanio").text(modelo.Content.size)
+            $("#txtVisitas").text(modelo.Content.viewsContent)
+            $("#txtIdioma").text(modelo.Content.languageContent)
+            $("#txtFormato").text(modelo.Content.formatContent)
+            $("#txtProductor").text(modelo.Content.producer)
+            $("#imgPreview").attr("src", modelo.Content.imageUrl);
 
             if (modelo.FilmInfo || modelo.SerieInfo) 
             {
@@ -216,8 +211,7 @@
                 }
             }
             $('.modal').modal('show');
-        }
-            
+        }   
         
         function listaContenidos() 
         {

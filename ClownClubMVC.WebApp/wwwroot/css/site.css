@@ -20,6 +20,22 @@ html {
 body {
   margin-bottom: 60px;
 }
+body{
+    background-color: #f2f2f2;
+}
+.navbar-brand {
+    display: flex;
+    align-items: center;
+}
+.logo {
+    padding-right: 30px;
+    width: 50px; /* Ancho de la imagen */
+    height: 50px; /* Alto de la imagen */
+    background-image: url('../img/jester-hat.png');
+    background-repeat: no-repeat;
+    background-size: contain; /* Ajustar tamaño de la imagen */
+    margin-right: 10px; /* Espacio entre la imagen y el texto */
+}
 
 .btn-outline-primary:hover {
     color: #007bff;

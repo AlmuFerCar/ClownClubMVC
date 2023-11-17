@@ -31,5 +31,11 @@ namespace ClownClubMVC.Business.Services.Content
         {
             return await _contentRepo.GetAll();
         }
+        public async Task<content> GetOneByTitle(string title)
+        {
+            IQueryable<content> queryContentSQL = await _contentRepo.GetAll();
+            content content= queryContentSQL.Where(c => c.title == title).FirstOrDefault();
+            return content;
+        }
     }
 }
