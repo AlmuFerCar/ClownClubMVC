@@ -9,7 +9,6 @@
       "ClownClubMVC.WebApp/1.0.0": {
         "dependencies": {
           "ClownClubMVC.Business": "1.0.0",
-          "ClownClubMVC.Data": "1.0.0",
           "ClownClubMVC.Models": "1.0.0"
         },
         "runtime": {

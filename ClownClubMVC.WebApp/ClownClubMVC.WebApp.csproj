@@ -8,7 +8,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClownClubMVC.Business\ClownClubMVC.Business.csproj" />
-    <ProjectReference Include="..\ClownClubMVC.Data\ClownClubMVC.Data.csproj" />
     <ProjectReference Include="..\ClownClubMVC.Models\ClownClubMVC.Models.csproj" />
   </ItemGroup>
 
